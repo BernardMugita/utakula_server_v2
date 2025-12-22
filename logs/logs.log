@@ -1,0 +1,519 @@
+INFO:controllers.helpers.meal_plan_helpers:Breakfast options: 8, Lunch/Supper options: 1, Fruits: 0, Beverages: 0
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan with total calories: 7825
+INFO:controllers.helpers.meal_plan_helpers:Breakfast options: 8, Lunch/Supper options: 1, Fruits: 0, Beverages: 0
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan with total calories: 7825
+INFO:controllers.helpers.meal_plan_helpers:Breakfast options: 8, Lunch/Supper options: 1, Fruits: 0, Beverages: 0
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan with total calories: 7825
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1200 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1200 → Adjusted: 1380
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 345, Lunch: 483, Supper: 414
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 13593, Avg Daily: 1942 (Target: 1380)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegetarian'], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 42 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 42 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1200 → Adjusted: 1380
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 345, Lunch: 483, Supper: 414
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8493, Avg Daily: 1213 (Target: 1380)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 1200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegetarian'], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 42 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 42 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1200 → Adjusted: 1200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 360, Lunch: 420, Supper: 360
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 6156, Avg Daily: 879 (Target: 1200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegetarian'], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 42 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 42 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1500
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 450, Lunch: 525, Supper: 450
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 6246, Avg Daily: 892 (Target: 1500)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['gluten_free'], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 16 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 16 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1500
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 450, Lunch: 525, Supper: 450
+WARNING:controllers.helpers.meal_plan_helpers:No breakfast foods available!
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 2210, Avg Daily: 316 (Target: 1500)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 16600, Avg Daily: 2371 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 17840, Avg Daily: 2549 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+ERROR:controllers.meal_plan_controller:Error in suggest_meal_plan: 'Breakfast'
+Traceback (most recent call last):
+  File "/home/jeromemugita/Documents/Code/meal_planner_app/utakula_server/controllers/meal_plan_controller.py", line 183, in suggest_meal_plan
+    meal_plan = await MealPlanHelpers.generate_user_meal_plan(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jeromemugita/Documents/Code/meal_planner_app/utakula_server/controllers/helpers/meal_plan_helpers.py", line 270, in generate_user_meal_plan
+    day_plan["meal_plan"]["Breakfast"].append(SelectedFood(
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'Breakfast'
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 15298, Avg Daily: 2185 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegetarian'], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 42 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 42 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8901, Avg Daily: 1272 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: [], Conditions: ['hypertension']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 9417, Avg Daily: 1345 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 14066, Avg Daily: 2009 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 15767, Avg Daily: 2252 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1725
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 431, Lunch: 604, Supper: 517
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 14753, Avg Daily: 2108 (Target: 1725)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8008, Avg Daily: 1144 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10163, Avg Daily: 1452 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 9373, Avg Daily: 1339 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 9074, Avg Daily: 1296 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 11556, Avg Daily: 1651 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 9231, Avg Daily: 1319 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10627, Avg Daily: 1518 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8473, Avg Daily: 1210 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10824, Avg Daily: 1546 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8306, Avg Daily: 1187 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 9284, Avg Daily: 1326 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 11547, Avg Daily: 1650 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: ['eggs'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 48 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 48 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2200 → Adjusted: 2200
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 660, Lunch: 770, Supper: 660
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10304, Avg Daily: 1472 (Target: 2200)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 17557, Avg Daily: 2508 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18837, Avg Daily: 2691 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 17471, Avg Daily: 2496 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2700 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2700 → Adjusted: 2700
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 810, Lunch: 945, Supper: 810
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 11048, Avg Daily: 1578 (Target: 2700)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 1800 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['keto'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 7 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 7 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1800 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 4559, Avg Daily: 651 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 1200 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['pescatarian'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 3 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 3 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1200 → Adjusted: 1080
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 324, Lunch: 378, Supper: 324
+WARNING:controllers.helpers.meal_plan_helpers:No breakfast foods available!
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 4382, Avg Daily: 626 (Target: 1080)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 16217, Avg Daily: 2317 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 4832, Avg Daily: 690 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18018, Avg Daily: 2574 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2000
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 600, Lunch: 700, Supper: 600
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 8886, Avg Daily: 1269 (Target: 2000)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2400 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2400 → Adjusted: 2400
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 720, Lunch: 840, Supper: 720
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10676, Avg Daily: 1525 (Target: 2400)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 1500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 1500 → Adjusted: 1350
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 405, Lunch: 472, Supper: 405
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5190, Avg Daily: 741 (Target: 1350)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2400 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2400 → Adjusted: 2400
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 720, Lunch: 840, Supper: 720
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10251, Avg Daily: 1464 (Target: 2400)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2000
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 600, Lunch: 700, Supper: 600
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 10454, Avg Daily: 1493 (Target: 2000)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegan'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 52 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 52 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18262, Avg Daily: 2609 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegan'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 52 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 52 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18312, Avg Daily: 2616 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegan'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 52 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 52 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 20123, Avg Daily: 2875 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5111, Avg Daily: 730 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2700 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['kosher'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 61 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 61 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2700 → Adjusted: 3105
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 776, Lunch: 1087, Supper: 931
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18045, Avg Daily: 2578 (Target: 3105)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: [], Conditions: ['gerd']
+INFO:controllers.helpers.meal_plan_helpers:Found 0 foods matching all requirements
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['kosher'], Allergies: [], Conditions: ['gerd']
+INFO:controllers.helpers.meal_plan_helpers:Found 0 foods matching all requirements
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: [], Allergies: [], Conditions: ['gerd']
+INFO:controllers.helpers.meal_plan_helpers:Found 0 foods matching all requirements
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegan'], Allergies: [], Conditions: []
+INFO:controllers.helpers.meal_plan_helpers:Found 52 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 52 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 4653, Avg Daily: 665 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5268, Avg Daily: 753 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5011, Avg Daily: 716 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 4582, Avg Daily: 655 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 17852, Avg Daily: 2550 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5538, Avg Daily: 791 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 17190, Avg Daily: 2456 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MAINTENANCE, Daily Target: 2500 kcal
+INFO:controllers.helpers.meal_plan_helpers:Filtering - Preferences: ['vegan'], Allergies: ['dairy'], Conditions: ['diabetes']
+INFO:controllers.helpers.meal_plan_helpers:Found 42 foods matching all requirements
+INFO:controllers.meal_plan_controller:After dietary filtering: 42 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MAINTENANCE
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2500 → Adjusted: 2500
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 750, Lunch: 875, Supper: 750
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 7684, Avg Daily: 1098 (Target: 2500)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 2300
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 575, Lunch: 805, Supper: 690
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 16578, Avg Daily: 2368 (Target: 2300)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2500 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2500 → Adjusted: 2250
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 675, Lunch: 788, Supper: 675
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5296, Avg Daily: 757 (Target: 2250)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: WEIGHT_LOSS, Daily Target: 2000 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: WEIGHT_LOSS
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2000 → Adjusted: 1800
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 540, Lunch: 630, Supper: 540
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 5397, Avg Daily: 771 (Target: 1800)
+INFO:controllers.meal_plan_controller:Processing meal plan for user: e7371a0c-42c8-4895-a89c-3a06ef224416
+INFO:controllers.meal_plan_controller:Body Goal: MUSCLE_GAIN, Daily Target: 2300 kcal
+INFO:controllers.helpers.meal_plan_helpers:No dietary requirements, returning all foods
+INFO:controllers.meal_plan_controller:After dietary filtering: 80 foods available
+INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
+INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2300 → Adjusted: 2645
+INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 661, Lunch: 926, Supper: 794
+INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18163, Avg Daily: 2595 (Target: 2645)
