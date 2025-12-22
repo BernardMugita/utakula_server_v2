@@ -1,6 +1,6 @@
 from fastapi import HTTPException, Header, status
 from fastapi.responses import JSONResponse
-import google.generativeai as genai
+from google import genai
 import os
 
 from schemas.genai_schema import PreparationBody, GenAIResponse, PromptBody

@@ -517,3 +517,33 @@ INFO:controllers.helpers.meal_plan_helpers:Body Goal: MUSCLE_GAIN
 INFO:controllers.helpers.meal_plan_helpers:Daily Target: 2300 → Adjusted: 2645
 INFO:controllers.helpers.meal_plan_helpers:Meal Targets - Breakfast: 661, Lunch: 926, Supper: 794
 INFO:controllers.helpers.meal_plan_helpers:Generated meal plan - Weekly Total: 18163, Avg Daily: 2595 (Target: 2645)
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
