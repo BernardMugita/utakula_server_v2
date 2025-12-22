@@ -547,3 +547,37 @@ INFO:apscheduler.scheduler:Scheduler has been shut down
 INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
 INFO:apscheduler.scheduler:Scheduler started
 INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started

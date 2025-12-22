@@ -53,10 +53,6 @@ class NotificationScheduler:
             
             # Schedule multiple notifications based on frequency
             for i in range(frequency):
-                # Calculate the time for each notification
-                # For example, if frequency is 2 and time_before is 2 hours:
-                # Notification 1: 2 hours before
-                # Notification 2: 1 hour before
                 hours_before = time_before - (i * (time_before / frequency))
                 notif_hour = int((hour - hours_before) % 24)
                 
@@ -132,10 +128,7 @@ class NotificationScheduler:
             
             logger.info(f"Notification sent successfully: {notification}")
             
-            # TODO: Here you would actually send the notification via:
-            # - Push notification service (Firebase, OneSignal, etc.)
-            # - Email
-            # - SMS
+            # TODO: Send the notification via:
             # - In-app notification
             
         except Exception as e:
