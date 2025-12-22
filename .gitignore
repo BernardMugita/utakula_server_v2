@@ -6,6 +6,7 @@ controllers/__pycache__/
 routes/__pycache__/
 models/__pycache__/
 schemas/__pycache__/
+utils/__pycache__/
 
 # Ignore __pycache__ in the main directory
 /__pycache__/
@@ -16,3 +17,10 @@ schemas/__pycache__/
 # alembic folder
 alembic
 alembic.ini
+
+
+# environment folder
+.venv
+
+# logs folder
+logs
