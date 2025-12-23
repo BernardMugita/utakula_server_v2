@@ -20,7 +20,7 @@ def get_db_connection():
 async def get_users(db: Session = Depends(get_db_connection), authorization: str = Header(...)):
     return user_controller.get_all_users(db, authorization)
 
-@router.post("/users/get_user_by_id", response_model=RetrieveUserResponse) 
+@router.post("/users/get_user_account", response_model=RetrieveUserResponse) 
 async def get_user(db: Session = Depends(get_db_connection), authorization: str = Header(...)):
     return user_controller.get_user_by_id(db, authorization)
 

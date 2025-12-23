@@ -141,6 +141,8 @@ class UserController:
             
             if user_data.email is not None:
                 user.email = user_data.email
+            if user_data.device_token is not None:
+                user.device_token = user_data.device_token
 
             # Commit the changes to the database
             db.commit()

@@ -28,7 +28,7 @@ class NotificationFor(BaseModel):
         return v
     
 class NotificationSettings(BaseModel):
-    time_before_meals: int
+    time_before_meals: int | float
     frequency_before_meals: int
     notification_for: list[NotificationFor]
     

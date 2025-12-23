@@ -21,6 +21,7 @@ class UserModel(Base):
     role: Mapped[str] = mapped_column(String(50), nullable=False, default="user")
     email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
     _password_hash: Mapped[str] = mapped_column(String(100), name="password", nullable=False)
+    device_token: Mapped[str] = mapped_column(String(255), nullable=True)
 
     meal_plan = relationship("MealPlanModel", back_populates="user", uselist=False)
     notifications = relationship("NotificationModel", back_populates="user", uselist=False)

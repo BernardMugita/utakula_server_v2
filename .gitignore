@@ -24,3 +24,6 @@ alembic.ini
 
 # logs folder
 logs
+
+# firebase json
+firebaseCreds.json

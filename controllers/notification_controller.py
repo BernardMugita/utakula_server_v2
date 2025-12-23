@@ -81,6 +81,7 @@ class NotificationController:
             # Schedule notifications for this user
             notification_scheduler.schedule_user_notifications(
                 user_id=exiting_user.id,
+                device_token=exiting_user.device_token,
                 notification_settings={
                     'time_before_meals': settings.time_before_meals,
                     'frequency_before_meals': settings.frequency_before_meals,
@@ -134,13 +135,6 @@ class NotificationController:
             notification_settings = db.query(NotificationModel).filter(
                 NotificationModel.user_id == payload['user_id']
             ).first()
-            
-            print({
-                "id": notification_settings.id,
-                "time_before_meals": notification_settings.time_before_meals,
-                "frequency_before_meals": notification_settings.frequency_before_meals,
-                "notification_for": notification_settings.notification_for
-            })
             
             if not notification_settings:
                 raise HTTPException(

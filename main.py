@@ -9,14 +9,16 @@ from routes.invitation_routes import router as invitation_router
 from routes.genai_routes import router as genai_router
 from routes.notification_routes import router as notification_router
 from controllers.helpers.notification_scheduler import notification_scheduler
+from utils.helper_utils import HelperUtils
+
+helper_utils = HelperUtils()
+helper_utils.initialize_firebase()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     notification_scheduler.start()
     print("Notification scheduler started")
-    
     yield
-    
     notification_scheduler.stop()
     print("Notification scheduler stopped")
 

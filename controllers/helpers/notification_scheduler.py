@@ -1,4 +1,4 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler, BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from sqlalchemy.orm import Session
 from datetime import datetime
@@ -6,6 +6,8 @@ from models.notification_model import NotificationModel
 from models.meal_plan_model import MealPlanModel
 from controllers.helpers.notification_helpers import NotiticationHelpers
 import logging
+from firebase_admin import messaging
+from connect import SessionLocal
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -25,7 +27,7 @@ class NotificationScheduler:
         self.scheduler.shutdown()
         logger.info("Notification scheduler stopped")
         
-    def schedule_user_notifications(self, user_id: str, notification_settings: dict):
+    def schedule_user_notifications(self, user_id: str, device_token: str, notification_settings: dict):
         """
         Schedule notifications for a specific user based on their settings
         
@@ -51,6 +53,20 @@ class NotificationScheduler:
             # Calculate frequency (how many notifications before the meal)
             frequency = notification_settings['frequency_before_meals']
             
+            # job_id = f"user_{user_id}_meal_{meal}_notif_test"
+            
+            # Schedule the job
+            # self.scheduler.add_job(
+            #     func=self._send_scheduled_notification,
+            #     trigger='interval',
+            #     seconds=5,  # For testing purposes, send every minute
+            #     args=[user_id, device_token, meal],
+            #     id=job_id,
+            #     replace_existing=True
+            # )
+            
+            # self._send_scheduled_notification(user_id, device_token, meal)  # Immediate test notification
+            
             # Schedule multiple notifications based on frequency
             for i in range(frequency):
                 hours_before = time_before - (i * (time_before / frequency))
@@ -58,11 +74,10 @@ class NotificationScheduler:
                 
                 job_id = f"user_{user_id}_meal_{meal}_notif_{i}"
                 
-                # Schedule the job
                 self.scheduler.add_job(
                     func=self._send_scheduled_notification,
                     trigger=CronTrigger(hour=notif_hour, minute=minute),
-                    args=[user_id, meal],
+                    args=[user_id, device_token, meal],
                     id=job_id,
                     replace_existing=True
                 )
@@ -77,7 +92,7 @@ class NotificationScheduler:
                 self.scheduler.remove_job(job.id)
                 logger.info(f"Removed job: {job.id}")
     
-    def _send_scheduled_notification(self, user_id: str, meal: str):
+    def _send_scheduled_notification(self, user_id: str, device_token: str, meal: str):
         """
         Internal method to send a notification (called by scheduler)
         
@@ -85,7 +100,7 @@ class NotificationScheduler:
             user_id: The user's ID
             meal: The meal name (breakfast, lunch, supper)
         """
-        db = Session()
+        db = SessionLocal()
         try:
             logger.info(f"Sending notification for user {user_id}, meal: {meal}")
             
@@ -93,6 +108,8 @@ class NotificationScheduler:
             existing_meal_plan = db.query(MealPlanModel).filter(
                 MealPlanModel.user_id == user_id
             ).first()
+            
+            print(existing_meal_plan)
             
             if not existing_meal_plan:
                 logger.warning(f"No meal plan found for user {user_id}")
@@ -128,8 +145,21 @@ class NotificationScheduler:
             
             logger.info(f"Notification sent successfully: {notification}")
             
-            # TODO: Send the notification via:
-            # - In-app notification
+            # Send message via Firebase
+            message = messaging.Message(
+                notification=messaging.Notification(
+                    title=notification.notification_title,
+                    body=notification.notification_message
+                ),
+                data={
+                    "food_images": ",".join(notification.food_images),
+                    "notification_time": notification.notification_time
+                },
+                token=device_token
+            )
+            
+            messaging.send(message)
+            logger.info(f"Firebase message sent to user {user_id}")
             
         except Exception as e:
             logger.error(f"Error sending notification: {str(e)}")

@@ -1,6 +1,12 @@
 from fastapi import HTTPException, status
 import jwt
 import os
+import firebase_admin
+from firebase_admin import credentials
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class HelperUtils:
     def __init__(self) -> None:
@@ -33,3 +39,19 @@ class HelperUtils:
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token"
             )
+            
+    def initialize_firebase(self):
+        """
+        Initialize Firebase Admin SDK
+        """
+        logger.info("Initializing Firebase Admin SDK")
+        try:
+            if not firebase_admin._apps:
+                cred = credentials.Certificate("/home/jeromemugita/Documents/Code/utakula_server/firebaseCreds.json")
+                firebase_admin.initialize_app(cred)
+                logger.info("Firebase Admin SDK initialized successfully")
+            else:
+                logger.info("Firebase Admin SDK already initialized")
+        except Exception as e:
+            logger.error(f"Error initializing Firebase Admin SDK: {str(e)}")
+        

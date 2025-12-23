@@ -581,3 +581,23 @@ INFO:apscheduler.scheduler:Scheduler has been shut down
 INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
 INFO:apscheduler.scheduler:Scheduler started
 INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: breakfast at 6:00
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: breakfast at 7:00
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: lunch at 11:00
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: lunch at 12:00
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: supper at 17:00
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:controllers.helpers.notification_scheduler:Scheduled notification for user e7371a0c-42c8-4895-a89c-3a06ef224416, meal: supper at 18:00
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+INFO:controllers.helpers.notification_scheduler:Notification scheduler started
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:controllers.helpers.notification_scheduler:Notification scheduler stopped

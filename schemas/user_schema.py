@@ -12,6 +12,7 @@ class UserRead(BaseModel):
     username: str
     role: str
     email: EmailStr
+    device_token: str | None = None
     
 class UserAuthorize(BaseModel):
     username: str
@@ -33,7 +34,8 @@ class RegisterResponse(BaseModel):
     payload: UserRead | str
     
 class UserUpdate(BaseModel):
-    email: EmailStr
+    email: EmailStr | None = None
+    device_token: str | None = None
     
 class RetrieveUserResponse(BaseModel):
     status: str
