@@ -40,32 +40,25 @@ class NotificationScheduler:
         
         # Schedule notifications for each meal
         for meal_notif in notification_settings['notification_for']:
-            meal_time = meal_notif['meal_time']  # e.g., "08:00:00"
+            meal_time = meal_notif['meal_time']  # e.g., "08:00" or "0800"
             meal = meal_notif['meal']  # e.g., "breakfast"
             
-            # Parse the meal time
-            hour, minute, _ = map(int, meal_time.split(':'))
+            # Parse the meal time - FIXED VERSION
+            if ':' in meal_time:
+                # Handle "08:00" or "08:00:00" format
+                parts = meal_time.split(':')
+                hour = int(parts[0])
+                minute = int(parts[1]) if len(parts) > 1 else 0
+            else:
+                # Handle "0800" format
+                hour = int(meal_time[:2])
+                minute = int(meal_time[2:4]) if len(meal_time) >= 4 else 0
             
             # Calculate notification time based on time_before_meals
             time_before = notification_settings['time_before_meals']  # hours
-            notification_hour = (hour - time_before) % 24
             
             # Calculate frequency (how many notifications before the meal)
             frequency = notification_settings['frequency_before_meals']
-            
-            # job_id = f"user_{user_id}_meal_{meal}_notif_test"
-            
-            # Schedule the job
-            # self.scheduler.add_job(
-            #     func=self._send_scheduled_notification,
-            #     trigger='interval',
-            #     seconds=5,  # For testing purposes, send every minute
-            #     args=[user_id, device_token, meal],
-            #     id=job_id,
-            #     replace_existing=True
-            # )
-            
-            # self._send_scheduled_notification(user_id, device_token, meal)  # Immediate test notification
             
             # Schedule multiple notifications based on frequency
             for i in range(frequency):
@@ -109,8 +102,6 @@ class NotificationScheduler:
                 MealPlanModel.user_id == user_id
             ).first()
             
-            print(existing_meal_plan)
-            
             if not existing_meal_plan:
                 logger.warning(f"No meal plan found for user {user_id}")
                 return
@@ -152,7 +143,7 @@ class NotificationScheduler:
                     body=notification.notification_message
                 ),
                 data={
-                    "food_images": ",".join(notification.food_images),
+                    "food_images": ",".join(notification.food_images) if notification.food_images else "",
                     "notification_time": notification.notification_time
                 },
                 token=device_token

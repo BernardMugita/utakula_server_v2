@@ -18,6 +18,7 @@ class NotificationModel(Base):
     user_id: Mapped[str] = mapped_column(
         ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
+    notifications_enabled: Mapped[bool] = mapped_column(nullable=False, default=False)
     time_before_meals: Mapped[int] = mapped_column(nullable=False, default=1)
     frequency_before_meals: Mapped[int] = mapped_column(nullable=False, default=1)    
     notification_for: Mapped[list[NotificationFor]] = mapped_column(JSON, nullable=False)    

@@ -39,3 +39,13 @@ def set_notification_settings(
         notification_settings=notification_settings,
         authorization=authorization
     )
+    
+@router.post("/notifications/get_notification_settings", response_model=NotificationHandlerResponse)
+def get_notification_settings(
+    db: Session = Depends(get_db_connection),
+    authorization: str = Header(...),
+):
+    return notification_controller.get_user_notification_settings(
+        db=db,
+        authorization=authorization
+    )

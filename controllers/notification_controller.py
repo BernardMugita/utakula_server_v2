@@ -1,10 +1,11 @@
+import json
 from fastapi import HTTPException, Header, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from models.meal_plan_model import MealPlanModel
 from models.user_model import UserModel
 from models.notification_model import NotificationModel
-from schemas.notification_schema import MealPlanNotification, NotificationSettings, NotificationHandlerResponse
+from schemas.notification_schema import MealPlanNotification, NotificationFor, NotificationSettings, NotificationHandlerResponse
 from controllers.helpers.notification_helpers import NotiticationHelpers
 from utils.helper_utils import HelperUtils
 from controllers.helpers.notification_scheduler import NotificationScheduler
@@ -19,10 +20,10 @@ class NotificationController:
         pass
 
     def set_user_notification_settings(
-    self, 
-    db: Session, 
-    notification_settings: NotificationSettings, 
-    authorization: str = Header(...)
+        self, 
+        db: Session, 
+        notification_settings: NotificationSettings, 
+        authorization: str = Header(...)
     ):
         try:
             if not authorization.startswith("Bearer "):
@@ -61,6 +62,7 @@ class NotificationController:
             
             if existing_settings:
                 # Update existing settings
+                existing_settings.notifications_enabled = notification_settings.notifications_enabled  # Add this
                 existing_settings.time_before_meals = notification_settings.time_before_meals
                 existing_settings.frequency_before_meals = notification_settings.frequency_before_meals
                 existing_settings.notification_for = notification_for_dict
@@ -69,6 +71,7 @@ class NotificationController:
                 # Create new settings
                 settings = NotificationModel(
                     user_id=exiting_user.id,
+                    notifications_enabled=notification_settings.notifications_enabled,  # Use from request
                     time_before_meals=notification_settings.time_before_meals,
                     frequency_before_meals=notification_settings.frequency_before_meals,
                     notification_for=notification_for_dict
@@ -78,16 +81,20 @@ class NotificationController:
             db.commit()
             db.refresh(settings)
             
-            # Schedule notifications for this user
-            notification_scheduler.schedule_user_notifications(
-                user_id=exiting_user.id,
-                device_token=exiting_user.device_token,
-                notification_settings={
-                    'time_before_meals': settings.time_before_meals,
-                    'frequency_before_meals': settings.frequency_before_meals,
-                    'notification_for': settings.notification_for
-                }
-            )
+            # Only schedule notifications if enabled
+            if settings.notifications_enabled:
+                notification_scheduler.schedule_user_notifications(
+                    user_id=exiting_user.id,
+                    device_token=exiting_user.device_token,
+                    notification_settings={
+                        'time_before_meals': settings.time_before_meals,
+                        'frequency_before_meals': settings.frequency_before_meals,
+                        'notification_for': settings.notification_for
+                    }
+                )
+            else:
+                # Remove scheduled notifications if disabled
+                notification_scheduler.remove_user_notifications(exiting_user.id)
 
             return JSONResponse(
                 status_code=status.HTTP_200_OK,
@@ -108,12 +115,13 @@ class NotificationController:
                 ).model_dump()
             )
 
-    def send_notification_handler(
-        self, 
+
+    def get_user_notification_settings(
+        self,
         db: Session,
         authorization: str = Header(...)
     ):
-        try: 
+        try:
             if not authorization.startswith("Bearer "):
                 raise HTTPException(
                     status_code=status.HTTP_403_FORBIDDEN,
@@ -123,66 +131,32 @@ class NotificationController:
             token = authorization[7:]
             payload = utils.validate_JWT(token)
             
-            existing_meal_plan = db.query(MealPlanModel).filter(
-                MealPlanModel.user_id == payload['user_id']).first()
-            
-            if not existing_meal_plan:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="No meal plan found for the user."
-                )
-            
-            notification_settings = db.query(NotificationModel).filter(
+            existing_settings = db.query(NotificationModel).filter(
                 NotificationModel.user_id == payload['user_id']
             ).first()
             
-            if not notification_settings:
+            if not existing_settings:
                 raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Set notification settings before sending notifications."
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Notification settings not found for the user."
                 )
-            
-            day_of_the_week = datetime.now().strftime("%A").lower()
-            day_meal_foods = [
-                meal['meal_plan'] for meal in existing_meal_plan.meal_plan 
-                if meal['day'].lower() == day_of_the_week
-            ]
-            
-            time_of_the_day = datetime.now().hour
-            most_relevant_meal = [
-                meal_notification for meal_notification in notification_settings.notification_for
-                if abs(int(meal_notification['meal_time'].split(':')[0]) - time_of_the_day) <= notification_settings.time_before_meals
-            ]
-            
-            meal = most_relevant_meal[0]['meal'].capitalize() if most_relevant_meal else None
-            
-            if not meal:
-                return JSONResponse(
-                    status_code=status.HTTP_200_OK,
-                    content=NotificationHandlerResponse(
-                        status="success",
-                        message="No relevant meal found for current time.",
-                        payload=None
-                    ).model_dump()
-                )
-            
-            meal_foods = []
-            if day_meal_foods:
-                meal_dict = day_meal_foods[0]
-                meal_foods = meal_dict.get(meal.lower(), [])
-            
-            new_notification = notification_utils.send_notification(
-                meal=meal,
-                meal_foods=meal_foods,
-                is_authorized=True
-            )
             
             return JSONResponse(
                 status_code=status.HTTP_200_OK,
                 content=NotificationHandlerResponse(
                     status="success",
-                    message="Notification sent successfully.",
-                    payload=new_notification
+                    message="Notification settings retrieved successfully.",
+                    payload=NotificationSettings(
+                        notifications_enabled=existing_settings.notifications_enabled,  # ADD THIS LINE
+                        time_before_meals=existing_settings.time_before_meals,
+                        frequency_before_meals=existing_settings.frequency_before_meals,
+                        notification_for=[
+                            NotificationFor(
+                                meal=notif['meal'],
+                                meal_time=notif['meal_time']
+                            ) for notif in existing_settings.notification_for
+                        ]
+                    )
                 ).model_dump()
             )
             
@@ -191,7 +165,7 @@ class NotificationController:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 content=NotificationHandlerResponse(
                     status="error",
-                    message="Failed to send notification: " + str(e),
+                    message="Failed to retrieve notification settings: " + str(e),
                     payload=None
                 ).model_dump()
             )
