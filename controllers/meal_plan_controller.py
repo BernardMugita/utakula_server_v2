@@ -1,3 +1,4 @@
+# controllers/meal_plan_controller.py
 import asyncio
 import logging
 from fastapi import HTTPException, Header, status
@@ -7,13 +8,19 @@ from sqlalchemy.orm import Session
 from models.calorie_model import CalorieModel
 from models.meal_plan_model import MealPlanModel
 from models.user_model import UserModel
+from models.user_metrics_model import UserMetricsModel
 from schemas.calorie_schema import CalorieRead
-from schemas.meal_plan_schema import MealPlanPreferences, CreateMealPlanResponse, FetchMemberPlansResponse, MealPlanCreate, MealPlanRead, MealPlanUpdate, RetrieveMealPlanResponse, SharedMealPlanRead, SuggestMealPlanResponse, SuggestedMealPlan, UpdateMealPlanResponse
+from schemas.meal_plan_schema import (
+    MealPlanPreferences, CreateMealPlanResponse, FetchMemberPlansResponse, 
+    MealPlanCreate, MealPlanRead, MealPlanUpdate, RetrieveMealPlanResponse, 
+    SharedMealPlanRead, SuggestMealPlanResponse, SuggestedMealPlan, UpdateMealPlanResponse
+)
 from schemas.food_schema import FoodRead
 
 from models.food_model import FoodModel
 from utils.helper_utils import HelperUtils
 from controllers.helpers.meal_plan_helpers import MealPlanHelpers
+from controllers.helpers.tdee_calculator import TDEECalculator
 from utils.enums import BodyGoal
 
 utils = HelperUtils()
@@ -26,12 +33,10 @@ class MealPlanController:
         pass
     
     def create_meal_plan(self, meal_plan_data: MealPlanCreate, db: Session, authorization: str = Header(...)):
-        """Creates a new meal plan for a user.
-
-        Args:
-            db (Session): Database session.
-            meal_plan_data (MealPlanCreate): Data for the meal plan.
-            authorization (str, optional): Authorization token from header.
+        """
+        Creates a new meal plan for a user.
+        This is for MANUAL meal plan creation where users select their own foods.
+        Foods should already have grams and servings calculated.
         """
         
         try:
@@ -85,16 +90,14 @@ class MealPlanController:
                 ).dict()
             )
             
-    async def suggest_meal_plan(self, meal_plan_preferences: MealPlanPreferences, db: Session, authorization: str = Header(...)):
-        """Suggests an intelligent meal plan for a user based on body goals and calorie targets.
-
-        Args:
-            meal_plan_preferences (MealPlanPreferences): User preferences including body goal, calorie target, dietary restrictions
-            db (Session): Database session.
-            authorization (str, optional): Authorization token from header.
-            
-        Returns:
-            dict: Response with suggested meal plan including serving quantities
+    async def suggest_meal_plan(
+        self, 
+        meal_plan_preferences: MealPlanPreferences, 
+        db: Session, 
+        authorization: str = Header(...)
+    ):
+        """
+        Suggests an intelligent meal plan for a user based on TDEE or manual calorie target
         """
         
         try:
@@ -107,6 +110,7 @@ class MealPlanController:
                 
             token = authorization[7:]
             payload = utils.validate_JWT(token)
+            user_id = payload['user_id']
             
             # Validate body goal
             if meal_plan_preferences.body_goal not in BodyGoal.__members__:
@@ -115,14 +119,55 @@ class MealPlanController:
                     detail=f"Invalid body goal provided. Must be one of: {', '.join(BodyGoal.__members__.keys())}"
                 )
             
-            # Validate daily calorie target
-            if meal_plan_preferences.daily_calorie_target < 1200:
+            # Determine calorie target
+            calculated_tdee = None
+            target_calories = None
+            
+            if meal_plan_preferences.use_calculated_tdee:
+                # Get user's current metrics
+                user_metrics = db.query(UserMetricsModel).filter(
+                    UserMetricsModel.user_id == user_id,
+                    UserMetricsModel.is_current == True
+                ).first()
+                
+                if not user_metrics:
+                    return JSONResponse(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        content=SuggestMealPlanResponse(
+                            status="error",
+                            message="No user metrics found. Please complete your profile first or provide a manual calorie target.",
+                            payload=[]
+                        ).dict()
+                    )
+                
+                # Use stored TDEE and adjust for body goal
+                calculated_tdee = user_metrics.calculated_tdee
+                target_calories = TDEECalculator.adjust_for_body_goal(
+                    calculated_tdee,
+                    meal_plan_preferences.body_goal
+                )
+                
+                logger.info(f"Using calculated TDEE: {calculated_tdee:.0f} kcal/day, adjusted to {target_calories:.0f} for {meal_plan_preferences.body_goal}")
+            
+            else:
+                # Use manual calorie target
+                if not meal_plan_preferences.daily_calorie_target:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="Daily calorie target is required when not using calculated TDEE."
+                    )
+                
+                target_calories = meal_plan_preferences.daily_calorie_target
+                logger.info(f"Using manual calorie target: {target_calories:.0f} kcal/day")
+            
+            # Validate calorie target
+            if target_calories < 1200:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Daily calorie target should be at least 1200 calories for health safety."
                 )
             
-            if meal_plan_preferences.daily_calorie_target > 5000:
+            if target_calories > 5000:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Daily calorie target seems unusually high. Please verify."
@@ -157,9 +202,10 @@ class MealPlanController:
                 ) for food in food_list
             ]
             
-            logger.info(f"Processing meal plan for user: {payload.get('user_id')}")
-            logger.info(f"Body Goal: {meal_plan_preferences.body_goal}, Daily Target: {meal_plan_preferences.daily_calorie_target} kcal")
+            logger.info(f"Processing meal plan for user: {user_id}")
+            logger.info(f"Body Goal: {meal_plan_preferences.body_goal}, Target Calories: {target_calories:.0f} kcal")
             
+            # Filter by dietary requirements
             filtered_foods = await MealPlanHelpers.filter_by_dietary_requirements(
                 db, 
                 meal_plan_preferences.dietary_restrictions or [],
@@ -177,10 +223,11 @@ class MealPlanController:
             
             logger.info(f"After dietary filtering: {len(filtered_foods)} foods available")
             
+            # Generate meal plan
             meal_plan = await MealPlanHelpers.generate_user_meal_plan(
                 db,
                 filtered_foods,
-                meal_plan_preferences.daily_calorie_target,
+                target_calories,
                 meal_plan_preferences.body_goal
             )
             
@@ -190,7 +237,9 @@ class MealPlanController:
                 "payload": {
                     "id": '',
                     "members": [],
-                    "meal_plan": meal_plan
+                    "meal_plan": meal_plan,
+                    "calculated_tdee": calculated_tdee,
+                    "target_calories": target_calories
                 }
             }
         
@@ -209,13 +258,7 @@ class MealPlanController:
             )
     
     def get_user_meal_plan(self, db: Session, authorization: str = Header(...)):
-        """Creates a new meal plan for a user.
-
-        Args:
-            db (Session): Database session.
-            meal_plan_data (MealPlanCreate): Data for the meal plan.
-            authorization (str, optional): Authorization token from header.
-        """
+        """Get user's saved meal plan"""
         
         try:
             if not authorization.startswith("Bearer "):
@@ -232,13 +275,13 @@ class MealPlanController:
             
             if not meal_plan:
                 return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content=RetrieveMealPlanResponse(
-                    status="error",
-                    message="User does not have meal plan!",
-                    payload=[]
-                ).dict()
-            )
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    content=RetrieveMealPlanResponse(
+                        status="error",
+                        message="User does not have meal plan!",
+                        payload=[]
+                    ).dict()
+                )
             
             return {
                 "status": "success",
@@ -256,8 +299,8 @@ class MealPlanController:
                 ).dict()
             )
             
-            
     def update_user_meal_plan(self, db: Session, meal_plan_data: MealPlanUpdate, authorization: str):
+        """Update user's meal plan"""
         try:
             if not authorization.startswith("Bearer "):
                 raise HTTPException(
@@ -306,11 +349,8 @@ class MealPlanController:
                 meal_plan=meal_plan_dict
             )
             
-            # Update meal plan data
-            
             db.commit()
             db.refresh(meal_plan_info)  
-            
             
             return {
                 "status": "success",
@@ -327,21 +367,9 @@ class MealPlanController:
                     payload=str(e)
                 ).dict()
             )
-            
     
     def get_member_meal_plans(self, db: Session, authorization: str = Header(...)):
-        """Retrieve meal plans shared with the logged-in user.
-
-        Args:
-            db (Session): Database session.
-            authorization (str): Authorization header containing a Bearer token.
-
-        Raises:
-            HTTPException: For invalid or missing token information.
-
-        Returns:
-            dict: Response containing shared meal plans.
-        """
+        """Retrieve meal plans shared with the logged-in user."""
         try:
             # Validate the authorization header
             if not authorization.startswith("Bearer "):
@@ -391,7 +419,7 @@ class MealPlanController:
                     SharedMealPlanRead(
                         id=plan.id,
                         user_id=plan.user_id,
-                        owner=owner_user.username,  # Fetch correct username
+                        owner=owner_user.username,
                         members=plan.members,
                         meal_plan=plan.meal_plan
                     )
@@ -413,4 +441,3 @@ class MealPlanController:
                     payload=str(e)
                 ).dict()
             )
-

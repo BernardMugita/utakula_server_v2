@@ -271,9 +271,13 @@ class FoodController:
                     food_id=food.id,  # Changed from id= to food_id=
                     image_url=food.image_url,
                     name=food.name,
+                    reference_portion_grams=food.reference_portion_grams,
                     macro_nutrient=food.macro_nutrient,
                     meal_type=food.meal_type,
-                    calories=calorie_data  # Changed from calorie_breakdown= to calories=
+                    calories=calorie_data,  # Changed from calorie_breakdown= to calories=
+                    allergens=food.allergens,
+                    dietary_tags=food.dietary_tags,
+                    suitable_for_conditions=food.suitable_for_conditions
                 ))
 
             return {

@@ -1,5 +1,5 @@
 import json
-from fastapi import HTTPException, Header, status
+from fastapi import HTTPException, Header, logger, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from models.meal_plan_model import MealPlanModel
@@ -166,6 +166,74 @@ class NotificationController:
                 content=NotificationHandlerResponse(
                     status="error",
                     message="Failed to retrieve notification settings: " + str(e),
+                    payload=None
+                ).model_dump()
+            )
+            
+    
+    def get_scheduled_notifications(
+        self,
+        authorization: str = Header(...)
+    ):
+        try:
+            if not authorization.startswith("Bearer "):
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Authorization header must start with 'Bearer '"
+                )
+            
+            token = authorization[7:]
+            payload = utils.validate_JWT(token)
+            
+            jobs = notification_scheduler.scheduler.get_jobs()
+            
+            # Filter jobs for the current user
+            user_jobs = [
+                job for job in jobs 
+                if f"user_{payload['user_id']}" in job.id
+            ]
+            
+            jobs_list = []
+            for job in user_jobs:
+                try:
+                    # Get next run time safely
+                    next_run = None
+                    if hasattr(job, 'next_run_time') and job.next_run_time:
+                        next_run = job.next_run_time.isoformat()
+                    elif hasattr(job, 'trigger'):
+                        # Try to get next fire time from trigger
+                        next_fire = job.trigger.get_next_fire_time(None, datetime.now())
+                        if next_fire:
+                            next_run = next_fire.isoformat()
+                    
+                    jobs_list.append({
+                        "id": job.id,
+                        "next_run_time": next_run,
+                        "func_name": job.func.__name__ if hasattr(job, 'func') else None,
+                        "trigger": str(job.trigger) if hasattr(job, 'trigger') else None,
+                    })
+                except Exception as e:
+                    continue
+            
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content={
+                    "status": "success",
+                    "message": "Scheduled notifications retrieved successfully.",
+                    "payload": {
+                        "total_jobs": len(jobs_list),
+                        "scheduler_running": notification_scheduler.scheduler.running,
+                        "jobs": jobs_list
+                    }
+                }
+            )
+            
+        except Exception as e:
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=NotificationHandlerResponse(
+                    status="error",
+                    message=f"Failed to retrieve scheduled notifications: {str(e)}",
                     payload=None
                 ).model_dump()
             )
