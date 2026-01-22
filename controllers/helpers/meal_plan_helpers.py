@@ -1,11 +1,13 @@
+# controllers/helpers/meal_plan_helpers.py
 import logging
 import random
 from typing import List, Dict, Tuple
 from sqlalchemy.orm import Session
 from models.food_model import FoodModel
 from schemas.calorie_schema import FoodRead
-from schemas.meal_plan_schema import SelectedFood
+from schemas.meal_plan_schema import SelectedFood, MacroBreakdown
 from utils.enums import BodyGoal
+from controllers.helpers.service_size_helper import ServingSizeHelper
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='logs/logs.log', level=logging.INFO)
@@ -18,41 +20,41 @@ class MealPlanHelpers:
             "breakfast": 0.30, 
             "lunch": 0.35,    
             "supper": 0.30,    
-            "snacks": 0.05,   
-            "adjustment": -0.10 
+            "snacks": 0.05,
         },
         BodyGoal.MUSCLE_GAIN.name: {
             "breakfast": 0.25,
             "lunch": 0.35,
             "supper": 0.30,
             "snacks": 0.10,
-            "adjustment": 0.15  
         },
         BodyGoal.MAINTENANCE.name: {
             "breakfast": 0.30,
             "lunch": 0.35,
             "supper": 0.30,
             "snacks": 0.05,
-            "adjustment": 0.0
         }
     }
     
-    # Serving quantity ranges by body goal
-    SERVING_RANGES = {
+    # Grams ranges by body goal (for main items)
+    GRAMS_RANGES = {
         BodyGoal.WEIGHT_LOSS.name: {
-            "main_min": 1, "main_max": 2,
-            "side_min": 1, "side_max": 1,
-            "beverage_min": 1, "beverage_max": 1
+            "main_min_grams": 100, 
+            "main_max_grams": 200,
+            "side_min_grams": 80,
+            "side_max_grams": 100,
         },
         BodyGoal.MUSCLE_GAIN.name: {
-            "main_min": 2, "main_max": 4,
-            "side_min": 1, "side_max": 2,
-            "beverage_min": 1, "beverage_max": 2
+            "main_min_grams": 200,
+            "main_max_grams": 400,
+            "side_min_grams": 100,
+            "side_max_grams": 200,
         },
         BodyGoal.MAINTENANCE.name: {
-            "main_min": 1, "main_max": 3,
-            "side_min": 1, "side_max": 2,
-            "beverage_min": 1, "beverage_max": 1
+            "main_min_grams": 150,
+            "main_max_grams": 300,
+            "side_min_grams": 80,
+            "side_max_grams": 150,
         }
     }
     
@@ -159,72 +161,151 @@ class MealPlanHelpers:
             return random.choice(food_list)
     
     @staticmethod
-    def _calculate_optimal_serving(
-        food_calories: float,
+    def _calculate_grams_for_calories(
+        calories_per_100g: float,
         target_calories: float,
-        min_serving: int,
-        max_serving: int
-    ) -> int:
+        min_grams: float,
+        max_grams: float
+    ) -> float:
         """
-        Calculate optimal serving quantity to approach target calories.
-        """
-        if food_calories == 0:
-            return min_serving
+        Calculate grams needed to hit target calories, bounded by min/max
         
-        # Calculate ideal serving
-        ideal_serving = target_calories / food_calories
+        Formula: grams = (target_calories / calories_per_100g) * 100
+        """
+        if calories_per_100g == 0:
+            return min_grams
+        
+        # Calculate ideal grams
+        ideal_grams = (target_calories / calories_per_100g) * 100
         
         # Clamp to min/max range
-        optimal = round(ideal_serving)
-        optimal = max(min_serving, min(optimal, max_serving))
+        optimal_grams = max(min_grams, min(ideal_grams, max_grams))
         
-        return optimal
+        return round(optimal_grams, 1)
     
     @staticmethod
-    def _add_or_update_food(meal_items: List[SelectedFood], new_food: SelectedFood) -> float:
+    def _calculate_macros_for_portion(
+        food: FoodRead,
+        grams: float,
+        reference_portion_grams: int = 100
+    ) -> MacroBreakdown:
         """
-        Add a new food to meal or update serving quantity if it already exists.
-        Returns the calories added.
+        Calculate macro breakdown for a specific portion size
+        
+        Args:
+            food: FoodRead object with calorie breakdown
+            grams: Portion size in grams
+            reference_portion_grams: Reference portion (usually 100g)
+            
+        Returns:
+            MacroBreakdown with calculated values
+        """
+        
+        multiplier = grams / reference_portion_grams
+        
+        breakdown = food.calories.breakdown
+        
+        return MacroBreakdown(
+            protein_g=round(breakdown.protein.amount * multiplier, 1),
+            carbs_g=round(breakdown.carbohydrate.amount * multiplier, 1),
+            fat_g=round(breakdown.fat.amount * multiplier, 1),
+            fiber_g=round(breakdown.fiber.amount * multiplier, 1)
+        )
+    
+    @staticmethod
+    def _create_selected_food(
+        food: FoodRead,
+        grams: float,
+        reference_portion_grams: int = 100
+    ) -> SelectedFood:
+        """
+        Create a SelectedFood object with calculated calories, servings, and macros
+        """
+        # Calculate total calories for this portion
+        calories_per_100g = food.calories.total
+        total_calories = (grams / reference_portion_grams) * calories_per_100g
+        
+        # Calculate servings (human-friendly display)
+        servings = ServingSizeHelper.calculate_servings(
+            grams, 
+            food.macro_nutrient, 
+            food.meal_type
+        )
+        
+        # Calculate macro breakdown
+        macros = MealPlanHelpers._calculate_macros_for_portion(
+            food, 
+            grams, 
+            reference_portion_grams
+        )
+        
+        print(macros)
+        
+        return SelectedFood(
+            id=food.food_id,
+            name=food.name,
+            image_url=food.image_url,
+            grams=grams,
+            servings=servings,
+            calories_per_100g=calories_per_100g,
+            total_calories=round(total_calories, 1),
+            macros=macros
+        )
+    
+    @staticmethod
+    def _add_or_update_food(
+        meal_items: List[SelectedFood], 
+        new_food: SelectedFood
+    ) -> Tuple[float, MacroBreakdown]:
+        """
+        Add a new food to meal or update grams if it already exists.
+        Returns the calories added and macros added.
         """
         for existing_food in meal_items:
             if existing_food.id == new_food.id:
-                # Food already exists, increase serving quantity
-                existing_food.serving_quantity += new_food.serving_quantity
-                return new_food.calories * new_food.serving_quantity
+                # Food already exists, increase grams
+                existing_food.grams += new_food.grams
+                existing_food.servings += new_food.servings
+                existing_food.total_calories += new_food.total_calories
+                
+                # Update macros
+                existing_food.macros.protein_g += new_food.macros.protein_g
+                existing_food.macros.carbs_g += new_food.macros.carbs_g
+                existing_food.macros.fat_g += new_food.macros.fat_g
+                existing_food.macros.fiber_g += new_food.macros.fiber_g
+                
+                return new_food.total_calories, new_food.macros
         
         # Food doesn't exist, add it
         meal_items.append(new_food)
-        return new_food.calories * new_food.serving_quantity
+        return new_food.total_calories, new_food.macros
     
     @staticmethod
     async def generate_user_meal_plan(
         db: Session, 
         food_list: List[FoodRead], 
-        daily_calorie_target: int,
+        daily_calorie_target: float,
         body_goal: str
     ) -> List[Dict]:
         """
-        Generate an intelligent meal plan with serving quantities based on body goals.
+        Generate an intelligent meal plan with grams-based portions
         """
         
         if body_goal not in MealPlanHelpers.CALORIE_DISTRIBUTION:
             logger.warning(f"Unknown body goal: {body_goal}, defaulting to MAINTENANCE")
             body_goal = BodyGoal.MAINTENANCE.name
         
-        # Get calorie distribution and serving ranges for this body goal
+        # Get calorie distribution and grams ranges for this body goal
         distribution = MealPlanHelpers.CALORIE_DISTRIBUTION[body_goal]
-        serving_config = MealPlanHelpers.SERVING_RANGES[body_goal]
-        
-        # Adjust daily target based on body goal
-        adjusted_target = daily_calorie_target * (1 + distribution["adjustment"])
+        grams_config = MealPlanHelpers.GRAMS_RANGES[body_goal]
         
         # Calculate target calories per meal
-        breakfast_target = adjusted_target * distribution["breakfast"]
-        lunch_target = adjusted_target * distribution["lunch"]
-        supper_target = adjusted_target * distribution["supper"]
+        breakfast_target = daily_calorie_target * distribution["breakfast"]
+        lunch_target = daily_calorie_target * distribution["lunch"]
+        supper_target = daily_calorie_target * distribution["supper"]
         
         logger.info(f"Body Goal: {body_goal}")
-        logger.info(f"Daily Target: {daily_calorie_target} → Adjusted: {adjusted_target:.0f}")
+        logger.info(f"Daily Target: {daily_calorie_target:.0f} kcal")
         logger.info(f"Meal Targets - Breakfast: {breakfast_target:.0f}, Lunch: {lunch_target:.0f}, Supper: {supper_target:.0f}")
         
         # Categorize available foods
@@ -248,17 +329,20 @@ class MealPlanHelpers:
                     "lunch": [],
                     "supper": []
                 },
-                "total_calories": 0
+                "total_calories": 0,
+                "total_macros": MacroBreakdown(protein_g=0, carbs_g=0, fat_g=0, fiber_g=0)
             }
             
             # === BREAKFAST ===
             breakfast_calories = 0
+            breakfast_macros = MacroBreakdown(protein_g=0, carbs_g=0, fat_g=0, fiber_g=0)
+            
             if categorized_foods["breakfast"]:
-                # Select main breakfast item(s)
-                num_main_items = random.randint(serving_config["main_min"], serving_config["main_max"])
+                # Select 1-2 main breakfast items
+                num_main_items = random.randint(1, 2)
                 remaining_breakfast_target = breakfast_target
                 
-                for _ in range(num_main_items):
+                for i in range(num_main_items):
                     food = MealPlanHelpers._select_food_with_priority(
                         categorized_foods["breakfast"],
                         body_goal,
@@ -266,73 +350,71 @@ class MealPlanHelpers:
                     )
                     
                     if food:
-                        # Calculate serving quantity
-                        serving_qty = MealPlanHelpers._calculate_optimal_serving(
+                        # Calculate grams needed for portion of target
+                        target_for_this_item = remaining_breakfast_target / (num_main_items - i)
+                        grams = MealPlanHelpers._calculate_grams_for_calories(
                             food.calories.total,
-                            remaining_breakfast_target / num_main_items,
-                            1,
-                            4 if body_goal == BodyGoal.MUSCLE_GAIN.name else 2
+                            target_for_this_item,
+                            grams_config["main_min_grams"],
+                            grams_config["main_max_grams"]
                         )
                         
-                        item_total_calories = food.calories.total * serving_qty
+                        selected_food = MealPlanHelpers._create_selected_food(food, grams)
                         
-                   
-                        calories_added = MealPlanHelpers._add_or_update_food(
+                        calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                             day_plan["meal_plan"]["breakfast"],
-                            SelectedFood(
-                                id=food.food_id,
-                                name=food.name,
-                                image_url=food.image_url,
-                                calories=food.calories.total,
-                                serving_quantity=serving_qty
-                            )
+                            selected_food
                         )
                         
                         breakfast_calories += calories_added
+                        breakfast_macros.protein_g += macros_added.protein_g
+                        breakfast_macros.carbs_g += macros_added.carbs_g
+                        breakfast_macros.fat_g += macros_added.fat_g
+                        breakfast_macros.fiber_g += macros_added.fiber_g
                         remaining_breakfast_target -= calories_added
                 
-                # Add beverage
-                if categorized_foods["beverages"] and random.random() > 0.2:  # 80% chance
+                # Add beverage (80% chance)
+                if categorized_foods["beverages"] and random.random() > 0.2:
                     beverage = random.choice(categorized_foods["beverages"])
-                    serving_qty = random.randint(1, serving_config["beverage_max"])
+                    grams = random.randint(200, 300)  # 200-300ml
                     
-                    calories_added = MealPlanHelpers._add_or_update_food(
+                    selected_food = MealPlanHelpers._create_selected_food(beverage, grams)
+                    calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                         day_plan["meal_plan"]["breakfast"],
-                        SelectedFood(
-                            id=beverage.food_id,
-                            name=beverage.name,
-                            image_url=beverage.image_url,
-                            calories=beverage.calories.total,
-                            serving_quantity=serving_qty
-                        )
+                        selected_food
                     )
                     breakfast_calories += calories_added
+                    breakfast_macros.protein_g += macros_added.protein_g
+                    breakfast_macros.carbs_g += macros_added.carbs_g
+                    breakfast_macros.fat_g += macros_added.fat_g
+                    breakfast_macros.fiber_g += macros_added.fiber_g
                 
                 # Add fruit if there's room
                 if categorized_foods["fruits"] and breakfast_calories < breakfast_target * 0.9:
                     fruit = random.choice(categorized_foods["fruits"])
-                    serving_qty = random.randint(1, 2)
+                    grams = random.randint(100, 150)  # 100-150g
                     
-                    calories_added = MealPlanHelpers._add_or_update_food(
+                    selected_food = MealPlanHelpers._create_selected_food(fruit, grams)
+                    calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                         day_plan["meal_plan"]["breakfast"],
-                        SelectedFood(
-                            id=fruit.food_id,
-                            name=fruit.name,
-                            image_url=fruit.image_url,
-                            calories=fruit.calories.total,
-                            serving_quantity=serving_qty
-                        )
+                        selected_food
                     )
                     breakfast_calories += calories_added
+                    breakfast_macros.protein_g += macros_added.protein_g
+                    breakfast_macros.carbs_g += macros_added.carbs_g
+                    breakfast_macros.fat_g += macros_added.fat_g
+                    breakfast_macros.fiber_g += macros_added.fiber_g
             
             # === LUNCH ===
             lunch_calories = 0
+            lunch_macros = MacroBreakdown(protein_g=0, carbs_g=0, fat_g=0, fiber_g=0)
+            
             if categorized_foods["lunch_supper"]:
-                # Select main dish(es)
+                # Select 1-2 main dishes
                 num_main_items = random.randint(1, 2)
                 remaining_lunch_target = lunch_target
                 
-                for _ in range(num_main_items):
+                for i in range(num_main_items):
                     food = MealPlanHelpers._select_food_with_priority(
                         categorized_foods["lunch_supper"],
                         body_goal,
@@ -340,64 +422,66 @@ class MealPlanHelpers:
                     )
                     
                     if food:
-                        serving_qty = MealPlanHelpers._calculate_optimal_serving(
+                        target_for_this_item = remaining_lunch_target / (num_main_items - i)
+                        grams = MealPlanHelpers._calculate_grams_for_calories(
                             food.calories.total,
-                            remaining_lunch_target / num_main_items,
-                            1,
-                            3 if body_goal == BodyGoal.MUSCLE_GAIN.name else 2
+                            target_for_this_item,
+                            grams_config["main_min_grams"],
+                            grams_config["main_max_grams"]
                         )
                         
-                        item_total_calories = food.calories.total * serving_qty
-                        
-                        # Use helper to add or update existing food
-                        calories_added = MealPlanHelpers._add_or_update_food(
+                        selected_food = MealPlanHelpers._create_selected_food(food, grams)
+                        calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                             day_plan["meal_plan"]["lunch"],
-                            SelectedFood(
-                                id=food.food_id,
-                                name=food.name,
-                                image_url=food.image_url,
-                                calories=food.calories.total,
-                                serving_quantity=serving_qty
-                            )
+                            selected_food
                         )
                         
                         lunch_calories += calories_added
+                        lunch_macros.protein_g += macros_added.protein_g
+                        lunch_macros.carbs_g += macros_added.carbs_g
+                        lunch_macros.fat_g += macros_added.fat_g
+                        lunch_macros.fiber_g += macros_added.fiber_g
                         remaining_lunch_target -= calories_added
                 
-                # Add side dish or vegetable
+                # Add side dish (70% chance)
                 if categorized_foods["side_dishes"] and random.random() > 0.3:
                     side = random.choice(categorized_foods["side_dishes"])
-                    serving_qty = random.randint(serving_config["side_min"], serving_config["side_max"])
+                    grams = random.randint(
+                        grams_config["side_min_grams"], 
+                        grams_config["side_max_grams"]
+                    )
                     
-                    calories_added = MealPlanHelpers._add_or_update_food(
+                    selected_food = MealPlanHelpers._create_selected_food(side, grams)
+                    calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                         day_plan["meal_plan"]["lunch"],
-                        SelectedFood(
-                            id=side.food_id,
-                            name=side.name,
-                            image_url=side.image_url,
-                            calories=side.calories.total,
-                            serving_quantity=serving_qty
-                        )
+                        selected_food
                     )
                     lunch_calories += calories_added
+                    lunch_macros.protein_g += macros_added.protein_g
+                    lunch_macros.carbs_g += macros_added.carbs_g
+                    lunch_macros.fat_g += macros_added.fat_g
+                    lunch_macros.fiber_g += macros_added.fiber_g
                 
-                # Add beverage
+                # Add beverage (60% chance)
                 if categorized_foods["beverages"] and random.random() > 0.4:
                     beverage = random.choice(categorized_foods["beverages"])
-                    calories_added = MealPlanHelpers._add_or_update_food(
+                    grams = 250  # 250ml standard
+                    
+                    selected_food = MealPlanHelpers._create_selected_food(beverage, grams)
+                    calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                         day_plan["meal_plan"]["lunch"],
-                        SelectedFood(
-                            id=beverage.food_id,
-                            name=beverage.name,
-                            image_url=beverage.image_url,
-                            calories=beverage.calories.total,
-                            serving_quantity=1
-                        )
+                        selected_food
                     )
                     lunch_calories += calories_added
+                    lunch_macros.protein_g += macros_added.protein_g
+                    lunch_macros.carbs_g += macros_added.carbs_g
+                    lunch_macros.fat_g += macros_added.fat_g
+                    lunch_macros.fiber_g += macros_added.fiber_g
             
             # === SUPPER ===
             supper_calories = 0
+            supper_macros = MacroBreakdown(protein_g=0, carbs_g=0, fat_g=0, fiber_g=0)
+            
             if categorized_foods["lunch_supper"]:
                 # Select different main dish(es) from lunch
                 lunch_food_ids = {item.id for item in day_plan["meal_plan"]["lunch"]}
@@ -412,7 +496,7 @@ class MealPlanHelpers:
                 num_main_items = random.randint(1, 2)
                 remaining_supper_target = supper_target
                 
-                for _ in range(num_main_items):
+                for i in range(num_main_items):
                     food = MealPlanHelpers._select_food_with_priority(
                         available_supper_foods,
                         body_goal,
@@ -420,50 +504,57 @@ class MealPlanHelpers:
                     )
                     
                     if food:
-                        serving_qty = MealPlanHelpers._calculate_optimal_serving(
+                        target_for_this_item = remaining_supper_target / (num_main_items - i)
+                        grams = MealPlanHelpers._calculate_grams_for_calories(
                             food.calories.total,
-                            remaining_supper_target / num_main_items,
-                            1,
-                            3 if body_goal == BodyGoal.MUSCLE_GAIN.name else 2
+                            target_for_this_item,
+                            grams_config["main_min_grams"],
+                            grams_config["main_max_grams"]
                         )
                         
-                        item_total_calories = food.calories.total * serving_qty
-                        
-                        # Use helper to add or update existing food
-                        calories_added = MealPlanHelpers._add_or_update_food(
+                        selected_food = MealPlanHelpers._create_selected_food(food, grams)
+                        calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                             day_plan["meal_plan"]["supper"],
-                            SelectedFood(
-                                id=food.food_id,
-                                name=food.name,
-                                image_url=food.image_url,
-                                calories=food.calories.total,
-                                serving_quantity=serving_qty
-                            )
+                            selected_food
                         )
                         
                         supper_calories += calories_added
+                        supper_macros.protein_g += macros_added.protein_g
+                        supper_macros.carbs_g += macros_added.carbs_g
+                        supper_macros.fat_g += macros_added.fat_g
+                        supper_macros.fiber_g += macros_added.fiber_g
                         remaining_supper_target -= calories_added
                 
-                # Add side dish
+                # Add side dish (70% chance)
                 if categorized_foods["side_dishes"] and random.random() > 0.3:
                     side = random.choice(categorized_foods["side_dishes"])
-                    serving_qty = random.randint(serving_config["side_min"], serving_config["side_max"])
+                    grams = random.randint(
+                        grams_config["side_min_grams"], 
+                        grams_config["side_max_grams"]
+                    )
                     
-                    calories_added = MealPlanHelpers._add_or_update_food(
+                    selected_food = MealPlanHelpers._create_selected_food(side, grams)
+                    calories_added, macros_added = MealPlanHelpers._add_or_update_food(
                         day_plan["meal_plan"]["supper"],
-                        SelectedFood(
-                            id=side.food_id,
-                            name=side.name,
-                            image_url=side.image_url,
-                            calories=side.calories.total,
-                            serving_quantity=serving_qty
-                        )
+                        selected_food
                     )
                     supper_calories += calories_added
+                    supper_macros.protein_g += macros_added.protein_g
+                    supper_macros.carbs_g += macros_added.carbs_g
+                    supper_macros.fat_g += macros_added.fat_g
+                    supper_macros.fiber_g += macros_added.fiber_g
             
-            # Calculate total calories for the day
+            # Calculate day totals
             day_total = breakfast_calories + lunch_calories + supper_calories
-            day_plan["total_calories"] = round(day_total)
+            day_plan["total_calories"] = round(day_total, 1)
+            
+            # Sum up macros
+            day_plan["total_macros"] = MacroBreakdown(
+                protein_g=round(breakfast_macros.protein_g + lunch_macros.protein_g + supper_macros.protein_g, 1),
+                carbs_g=round(breakfast_macros.carbs_g + lunch_macros.carbs_g + supper_macros.carbs_g, 1),
+                fat_g=round(breakfast_macros.fat_g + lunch_macros.fat_g + supper_macros.fat_g, 1),
+                fiber_g=round(breakfast_macros.fiber_g + lunch_macros.fiber_g + supper_macros.fiber_g, 1)
+            )
             
             meal_plan.append(day_plan)
         
@@ -471,6 +562,6 @@ class MealPlanHelpers:
         weekly_total = sum(day["total_calories"] for day in meal_plan)
         avg_daily = weekly_total / 7
         
-        logger.info(f"Generated meal plan - Weekly Total: {weekly_total:.0f}, Avg Daily: {avg_daily:.0f} (Target: {adjusted_target:.0f})")
+        logger.info(f"Generated meal plan - Weekly Total: {weekly_total:.0f}, Avg Daily: {avg_daily:.0f} (Target: {daily_calorie_target:.0f})")
         
         return meal_plan

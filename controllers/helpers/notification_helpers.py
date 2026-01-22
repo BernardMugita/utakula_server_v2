@@ -47,7 +47,7 @@ class NotiticationHelpers:
 
             notification_time = datetime.now().isoformat() + "Z"
             notification_title = f"{meal} Reminder"
-            notification_message = f"You have {foods_text} scheduled for {meal}."
+            notification_message = f"You have {foods_text} for {meal}."
             
             return MealPlanNotification(
                         notification_time=notification_time,

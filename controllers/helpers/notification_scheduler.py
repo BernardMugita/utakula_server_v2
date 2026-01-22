@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 from models.notification_model import NotificationModel
 from models.meal_plan_model import MealPlanModel
+from models.user_model import UserModel
 from controllers.helpers.notification_helpers import NotiticationHelpers
 import logging
 from firebase_admin import messaging
@@ -156,6 +157,37 @@ class NotificationScheduler:
             logger.error(f"Error sending notification: {str(e)}")
         finally:
             db.close()
+
+    def reload_all_user_notifications(self, db: Session):
+        """Reload all users' notification settings on scheduler startup"""
+        try:
+            logger.info("🔄 Reloading all user notification schedules...")
+            
+            # Get all users with notification settings
+            all_settings = db.query(NotificationModel).filter(
+                NotificationModel.notifications_enabled == True
+            ).all()
+            
+            for settings in all_settings:
+                # Get user's device token
+                user = db.query(UserModel).filter(
+                    UserModel.id == settings.user_id
+                ).first()
+                
+                if user and user.device_token:
+                    self.schedule_user_notifications(
+                        user_id=user.id,
+                        device_token=user.device_token,
+                        notification_settings={
+                            'time_before_meals': settings.time_before_meals,
+                            'frequency_before_meals': settings.frequency_before_meals,
+                            'notification_for': settings.notification_for
+                        }
+                    )
+            
+            logger.info(f"✅ Reloaded notifications for {len(all_settings)} users")
+        except Exception as e:
+            logger.error(f"❌ Error reloading notifications: {e}")
 
 # Create a global scheduler instance
 notification_scheduler = NotificationScheduler()
