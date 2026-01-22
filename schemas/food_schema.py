@@ -22,6 +22,7 @@ class FoodRead(BaseModel):
     image_url: str
     macro_nutrient: str
     meal_type: str
+    reference_portion_grams: int
     dietary_tags: List[str] = []
     allergens: List[str] = []
     suitable_for_conditions: List[str] = []

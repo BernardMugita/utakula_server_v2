@@ -56,4 +56,4 @@ class MealPlanNotification(BaseModel):
 class NotificationHandlerResponse(BaseModel):
     status: str
     message: str
-    payload: Union[str, MealPlanNotification, NotificationSettings, None] = None
+    payload: Union[str, MealPlanNotification, NotificationSettings, None, list] = None
