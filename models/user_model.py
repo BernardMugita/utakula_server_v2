@@ -23,8 +23,10 @@ class UserModel(Base):
     _password_hash: Mapped[str] = mapped_column(String(100), name="password", nullable=False)
     device_token: Mapped[str] = mapped_column(String(255), nullable=True)
 
+    # Relationships
     meal_plan = relationship("MealPlanModel", back_populates="user", uselist=False)
     notifications = relationship("NotificationModel", back_populates="user", uselist=False)
+    metrics = relationship("UserMetricsModel", back_populates="user", cascade="all, delete-orphan")
 
     def set_password(self, password: str):
         """Hashes and stores the user's password."""

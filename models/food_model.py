@@ -1,7 +1,7 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 import uuid
 from enum import Enum
-from sqlalchemy import JSON, String, Enum as SqlEnum
+from sqlalchemy import JSON, String, Integer, Enum as SqlEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from models.models import Base
 from utils.enums import FoodAllergy, DietaryRestriction, MedicalDietaryCondition
@@ -31,6 +31,14 @@ class FoodModel(Base):
     # Enum type for meal_type
     meal_type: Mapped[MealTypeEnum] = mapped_column(SqlEnum(MealTypeEnum), nullable=False)
     
+    # NEW: Reference portion size (all calories are per this amount)
+    reference_portion_grams: Mapped[int] = mapped_column(
+        Integer,
+        default=100, 
+        nullable=False,
+        comment="Reference portion size in grams (default 100g). All calorie data is per this amount."
+    )
+    
     # ARRAY columns for lists of enums - store as strings
     allergens: Mapped[Optional[List[str]]] = mapped_column(
         JSON, 
@@ -49,4 +57,4 @@ class FoodModel(Base):
     )
     
     # Relationship with CalorieModel
-    calories = relationship("CalorieModel", back_populates="food", uselist=False)  # 'food' matches CalorieModel’s relationship attribute
+    calories = relationship("CalorieModel", back_populates="food", uselist=False)
