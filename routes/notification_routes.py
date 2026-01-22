@@ -49,3 +49,11 @@ def get_notification_settings(
         db=db,
         authorization=authorization
     )
+    
+@router.post("/notifications/get_scheduled_jobs")
+def get_scheduled_jobs(
+    authorization: str = Header(...),
+):
+    return notification_controller.get_scheduled_notifications(
+        authorization=authorization
+    )
