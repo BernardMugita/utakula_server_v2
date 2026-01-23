@@ -345,13 +345,17 @@ class FoodController:
                 )
             
             food = FoodRead(
-                food_id=single_food.id,  # Changed from id= to food_id=
-                image_url=single_food.image_url,
-                name=single_food.name,
-                macro_nutrient=single_food.macro_nutrient,
-                meal_type=single_food.meal_type,
-                calories=calorie_data  # Changed from calorie_breakdown= to calories=
-            )
+                    food_id=single_food.id,  # Changed from id= to food_id=
+                    image_url=single_food.image_url,
+                    name=single_food.name,
+                    reference_portion_grams=single_food.reference_portion_grams,
+                    macro_nutrient=single_food.macro_nutrient,
+                    meal_type=single_food.meal_type,
+                    calories=calorie_data,  # Changed from calorie_breakdown= to calories=
+                    allergens=single_food.allergens,
+                    dietary_tags=single_food.dietary_tags,
+                    suitable_for_conditions=single_food.suitable_for_conditions
+                )
                 
             return {
                 "status": "success",
