@@ -193,6 +193,7 @@ class MealPlanController:
                         total=food.calories.total,
                         breakdown=food.calories.breakdown
                     ),  
+                    reference_portion_grams=food.reference_portion_grams,
                     dietary_tags=food.dietary_tags,
                     allergens=food.allergens,
                     suitable_for_conditions=food.suitable_for_conditions,
