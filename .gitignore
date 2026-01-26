@@ -3,6 +3,7 @@
 
 # Ignore __pycache__ directories in specific folders
 controllers/__pycache__/
+controllers/helpers/__pycache__/
 routes/__pycache__/
 models/__pycache__/
 schemas/__pycache__/
