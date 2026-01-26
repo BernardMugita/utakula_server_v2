@@ -123,6 +123,8 @@ class MealPlanController:
             calculated_tdee = None
             target_calories = None
             
+            print("meal_plan_preferences:", meal_plan_preferences.use_calculated_tdee)
+            
             if meal_plan_preferences.use_calculated_tdee is True:
                 # Get user's current metrics
                 user_metrics = db.query(UserMetricsModel).filter(
