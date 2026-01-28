@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler, BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from sqlalchemy.orm import Session
-from datetime import datetime
+from datetime import datetime, time as time_type
 from models.notification_model import NotificationModel
 from models.meal_plan_model import MealPlanModel
 from models.user_model import UserModel
@@ -41,19 +41,28 @@ class NotificationScheduler:
         
         # Schedule notifications for each meal
         for meal_notif in notification_settings['notification_for']:
-            meal_time = meal_notif['meal_time']  # e.g., "08:00" or "0800"
+            meal_time = meal_notif['meal_time']  
             meal = meal_notif['meal']  # e.g., "breakfast"
             
-            # Parse the meal time - FIXED VERSION
-            if ':' in meal_time:
-                # Handle "08:00" or "08:00:00" format
-                parts = meal_time.split(':')
-                hour = int(parts[0])
-                minute = int(parts[1]) if len(parts) > 1 else 0
+            # Parse the meal time - handle both time objects and strings
+            if isinstance(meal_time, time_type):
+                # Already a time object
+                hour = meal_time.hour
+                minute = meal_time.minute
+            elif isinstance(meal_time, str):
+                # Parse string format
+                if ':' in meal_time:
+                    # Handle "08:00" or "08:00:00" format
+                    parts = meal_time.split(':')
+                    hour = int(parts[0])
+                    minute = int(parts[1]) if len(parts) > 1 else 0
+                else:
+                    # Handle "0800" format
+                    hour = int(meal_time[:2])
+                    minute = int(meal_time[2:4]) if len(meal_time) >= 4 else 0
             else:
-                # Handle "0800" format
-                hour = int(meal_time[:2])
-                minute = int(meal_time[2:4]) if len(meal_time) >= 4 else 0
+                logger.error(f"Unexpected meal_time type: {type(meal_time)}")
+                continue
             
             # Calculate notification time based on time_before_meals
             time_before = notification_settings['time_before_meals']  # hours
