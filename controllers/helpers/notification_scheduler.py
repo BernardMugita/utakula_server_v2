@@ -9,24 +9,33 @@ from controllers.helpers.notification_helpers import NotiticationHelpers
 import logging
 from firebase_admin import messaging
 from connect import SessionLocal
+import pytz
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Define timezone
+TIMEZONE = pytz.timezone('Africa/Nairobi')  # East Africa Time (EAT)
+
 class NotificationScheduler:
     def __init__(self):
-        self.scheduler = BackgroundScheduler()
+        # Configure scheduler with timezone
+        self.scheduler = BackgroundScheduler(timezone=TIMEZONE)
         self.notification_utils = NotiticationHelpers()
         
     def start(self):
         """Start the scheduler"""
-        self.scheduler.start()
-        logger.info("Notification scheduler started")
+        if not self.scheduler.running:
+            self.scheduler.start()
+            logger.info("Notification scheduler started")
+        else:
+            logger.info("Notification scheduler already running")
         
     def stop(self):
         """Stop the scheduler"""
-        self.scheduler.shutdown()
-        logger.info("Notification scheduler stopped")
+        if self.scheduler.running:
+            self.scheduler.shutdown()
+            logger.info("Notification scheduler stopped")
         
     def schedule_user_notifications(self, user_id: str, device_token: str, notification_settings: dict):
         """
@@ -79,13 +88,13 @@ class NotificationScheduler:
                 
                 self.scheduler.add_job(
                     func=self._send_scheduled_notification,
-                    trigger=CronTrigger(hour=notif_hour, minute=minute),
+                    trigger=CronTrigger(hour=notif_hour, minute=minute, timezone=TIMEZONE),
                     args=[user_id, device_token, meal],
                     id=job_id,
                     replace_existing=True
                 )
                 
-                logger.info(f"Scheduled notification for user {user_id}, meal: {meal} at {notif_hour}:{minute:02d}")
+                logger.info(f"✅ Scheduled notification for user {user_id}, meal: {meal} at {notif_hour}:{minute:02d} EAT")
     
     def remove_user_notifications(self, user_id: str):
         """Remove all scheduled notifications for a user"""
@@ -101,11 +110,12 @@ class NotificationScheduler:
         
         Args:
             user_id: The user's ID
+            device_token: User's FCM device token
             meal: The meal name (breakfast, lunch, supper)
         """
         db = SessionLocal()
         try:
-            logger.info(f"Sending notification for user {user_id}, meal: {meal}")
+            logger.info(f"🔔 Sending notification for user {user_id}, meal: {meal}")
             
             # Get user's meal plan
             existing_meal_plan = db.query(MealPlanModel).filter(
@@ -113,11 +123,14 @@ class NotificationScheduler:
             ).first()
             
             if not existing_meal_plan:
-                logger.warning(f"No meal plan found for user {user_id}")
+                logger.warning(f"⚠️ No meal plan found for user {user_id}")
                 return
             
-            # Get current day of the week
-            day_of_the_week = datetime.now().strftime("%A").lower()
+            # Get current day of the week in EAT timezone
+            now_eat = datetime.now(TIMEZONE)
+            day_of_the_week = now_eat.strftime("%A").lower()
+            
+            logger.info(f"📅 Current day: {day_of_the_week}")
             
             # Get meals for today
             day_meal_foods = [
@@ -126,7 +139,7 @@ class NotificationScheduler:
             ]
             
             if not day_meal_foods:
-                logger.warning(f"No meals found for {day_of_the_week}")
+                logger.warning(f"⚠️ No meals found for {day_of_the_week}")
                 return
             
             # Get foods for the specific meal
@@ -134,8 +147,10 @@ class NotificationScheduler:
             meal_foods = meal_dict.get(meal.lower(), [])
             
             if not meal_foods:
-                logger.warning(f"No foods found for meal: {meal}")
+                logger.warning(f"⚠️ No foods found for meal: {meal}")
                 return
+            
+            logger.info(f"🍽️ Found {len(meal_foods)} foods for {meal}")
             
             # Send the notification
             notification = self.notification_utils.send_notification(
@@ -144,7 +159,12 @@ class NotificationScheduler:
                 is_authorized=True
             )
             
-            logger.info(f"Notification sent successfully: {notification}")
+            logger.info(f"📧 Notification prepared: {notification.notification_title}")
+            
+            # Validate device token
+            if not device_token or device_token == "":
+                logger.error(f"❌ Invalid device token for user {user_id}")
+                return
             
             # Send message via Firebase
             message = messaging.Message(
@@ -154,16 +174,17 @@ class NotificationScheduler:
                 ),
                 data={
                     "food_images": ",".join(notification.food_images) if notification.food_images else "",
-                    "notification_time": notification.notification_time
+                    "notification_time": notification.notification_time,
+                    "meal": meal
                 },
                 token=device_token
             )
             
-            messaging.send(message)
-            logger.info(f"Firebase message sent to user {user_id}")
+            response = messaging.send(message)
+            logger.info(f"✅ Firebase message sent to user {user_id}, response: {response}")
             
         except Exception as e:
-            logger.error(f"Error sending notification: {str(e)}")
+            logger.error(f"❌ Error sending notification: {str(e)}", exc_info=True)
         finally:
             db.close()
 
@@ -176,6 +197,8 @@ class NotificationScheduler:
             all_settings = db.query(NotificationModel).filter(
                 NotificationModel.notifications_enabled == True
             ).all()
+            
+            logger.info(f"📋 Found {len(all_settings)} users with enabled notifications")
             
             for settings in all_settings:
                 # Get user's device token
@@ -193,10 +216,20 @@ class NotificationScheduler:
                             'notification_for': settings.notification_for
                         }
                     )
+                    logger.info(f"✅ Scheduled notifications for user {user.id}")
+                else:
+                    logger.warning(f"⚠️ User {settings.user_id} has no device token")
             
             logger.info(f"✅ Reloaded notifications for {len(all_settings)} users")
+            
+            # Log all scheduled jobs
+            jobs = self.scheduler.get_jobs()
+            logger.info(f"📊 Total scheduled jobs: {len(jobs)}")
+            for job in jobs:
+                logger.info(f"  - {job.id}: next run at {job.next_run_time}")
+                
         except Exception as e:
-            logger.error(f"❌ Error reloading notifications: {e}")
+            logger.error(f"❌ Error reloading notifications: {e}", exc_info=True)
 
 # Create a global scheduler instance
 notification_scheduler = NotificationScheduler()
