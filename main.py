@@ -11,7 +11,7 @@ from routes.genai_routes import router as genai_router
 from routes.notification_routes import router as notification_router
 from controllers.helpers.notification_scheduler import notification_scheduler
 from utils.helper_utils import HelperUtils
-from connect import SessionLocal  # Add this import
+from connect import SessionLocal
 import logging
 
 # Setup logger
