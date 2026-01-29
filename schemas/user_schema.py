@@ -17,6 +17,14 @@ class UserRead(BaseModel):
 class UserAuthorize(BaseModel):
     username: str
     password: str
+    
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr
+    new_password: str
+    otp: str
+    
+class OTPRequest(BaseModel):
+    email: EmailStr
 
 class SignedUser(BaseModel):
     id: str 
