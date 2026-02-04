@@ -37,7 +37,7 @@ class NotificationScheduler:
             self.scheduler.shutdown()
             logger.info("Notification scheduler stopped")
         
-    def schedule_user_notifications(self, user_id: str, device_token: str, notification_settings: dict):
+    def schedule_user_notifications(self, user_id: str, device_token: str, notification_settings: dict, db: Session):
         """
         Schedule notifications for a specific user based on their settings
         
@@ -47,6 +47,8 @@ class NotificationScheduler:
         """
         # Remove existing jobs for this user
         self.remove_user_notifications(user_id)
+        
+       
         
         # Schedule notifications for each meal
         for meal_notif in notification_settings['notification_for']:
@@ -89,12 +91,26 @@ class NotificationScheduler:
                 self.scheduler.add_job(
                     func=self._send_scheduled_notification,
                     trigger=CronTrigger(hour=notif_hour, minute=minute, timezone=TIMEZONE),
-                    args=[user_id, device_token, meal],
+                    args=[user_id, meal],
                     id=job_id,
                     replace_existing=True
                 )
                 
                 logger.info(f"✅ Scheduled notification for user {user_id}, meal: {meal} at {notif_hour}:{minute:02d} EAT")
+            
+            scheduled_jobs = self.get_scheduled_notifications(user_id=user_id)
+                
+            existing_settings = db.query(NotificationModel).filter(
+                NotificationModel.user_id == user_id
+            ).first()
+    
+            if not existing_settings or not existing_settings.notifications_enabled:
+                logger.info(f"Notifications are disabled for user {user_id}. No jobs scheduled.")
+                return
+            
+            existing_settings.scheduled_jobs = scheduled_jobs
+            db.commit()
+            db.refresh(existing_settings)
     
     def remove_user_notifications(self, user_id: str):
         """Remove all scheduled notifications for a user"""
@@ -104,18 +120,29 @@ class NotificationScheduler:
                 self.scheduler.remove_job(job.id)
                 logger.info(f"Removed job: {job.id}")
     
-    def _send_scheduled_notification(self, user_id: str, device_token: str, meal: str):
+    def _send_scheduled_notification(self, user_id: str, meal: str):
         """
-        Internal method to send a notification (called by scheduler)
+        Send notification immediately for a specific meal
+        Used by Flutter local notifications when they fire
         
         Args:
             user_id: The user's ID
-            device_token: User's FCM device token
             meal: The meal name (breakfast, lunch, supper)
         """
         db = SessionLocal()
         try:
-            logger.info(f"🔔 Sending notification for user {user_id}, meal: {meal}")
+            logger.info(f"🔔 Sending on-demand notification for user {user_id}, meal: {meal}")
+            
+            # Get user
+            user = db.query(UserModel).filter(UserModel.id == user_id).first()
+            
+            if not user:
+                logger.error(f"❌ User {user_id} not found")
+                return {"success": False, "error": "User not found"}
+            
+            if not user.device_token:
+                logger.error(f"❌ User {user_id} has no device token")
+                return {"success": False, "error": "No device token"}
             
             # Get user's meal plan
             existing_meal_plan = db.query(MealPlanModel).filter(
@@ -124,7 +151,7 @@ class NotificationScheduler:
             
             if not existing_meal_plan:
                 logger.warning(f"⚠️ No meal plan found for user {user_id}")
-                return
+                return {"success": False, "error": "No meal plan found"}
             
             # Get current day of the week in EAT timezone
             now_eat = datetime.now(TIMEZONE)
@@ -140,7 +167,7 @@ class NotificationScheduler:
             
             if not day_meal_foods:
                 logger.warning(f"⚠️ No meals found for {day_of_the_week}")
-                return
+                return {"success": False, "error": f"No meals found for {day_of_the_week}"}
             
             # Get foods for the specific meal
             meal_dict = day_meal_foods[0]
@@ -148,11 +175,11 @@ class NotificationScheduler:
             
             if not meal_foods:
                 logger.warning(f"⚠️ No foods found for meal: {meal}")
-                return
+                return {"success": False, "error": f"No foods found for {meal}"}
             
             logger.info(f"🍽️ Found {len(meal_foods)} foods for {meal}")
             
-            # Send the notification
+            # Prepare notification
             notification = self.notification_utils.send_notification(
                 meal=meal.capitalize(),
                 meal_foods=meal_foods,
@@ -161,12 +188,7 @@ class NotificationScheduler:
             
             logger.info(f"📧 Notification prepared: {notification.notification_title}")
             
-            # Validate device token
-            if not device_token or device_token == "":
-                logger.error(f"❌ Invalid device token for user {user_id}")
-                return
-            
-            # Send message via Firebase
+            # Send via Firebase
             message = messaging.Message(
                 notification=messaging.Notification(
                     title=notification.notification_title,
@@ -177,14 +199,24 @@ class NotificationScheduler:
                     "notification_time": notification.notification_time,
                     "meal": meal
                 },
-                token=device_token
+                token=user.device_token.strip()
             )
             
             response = messaging.send(message)
             logger.info(f"✅ Firebase message sent to user {user_id}, response: {response}")
             
+            return {
+                "success": True,
+                "notification": {
+                    "title": notification.notification_title,
+                    "body": notification.notification_message,
+                    "food_images": notification.food_images
+                }
+            }
+            
         except Exception as e:
             logger.error(f"❌ Error sending notification: {str(e)}", exc_info=True)
+            return {"success": False, "error": str(e)}
         finally:
             db.close()
 
@@ -214,7 +246,8 @@ class NotificationScheduler:
                             'time_before_meals': settings.time_before_meals,
                             'frequency_before_meals': settings.frequency_before_meals,
                             'notification_for': settings.notification_for
-                        }
+                        },
+                        db=db
                     )
                     logger.info(f"✅ Scheduled notifications for user {user.id}")
                 else:
@@ -230,6 +263,48 @@ class NotificationScheduler:
                 
         except Exception as e:
             logger.error(f"❌ Error reloading notifications: {e}", exc_info=True)
+            
+            
+    def get_scheduled_notifications(
+            self,
+            user_id: str
+        ):
+            try:
+                jobs = self.scheduler.get_jobs()
+                
+                user_jobs = [
+                    job for job in jobs 
+                    if f"user_{user_id}" in job.id
+                ]
+                
+                jobs_list = []
+                for job in user_jobs:
+                    try:
+                        # Get next run time safely
+                        next_run = None
+                        if hasattr(job, 'next_run_time') and job.next_run_time:
+                            next_run = job.next_run_time.isoformat()
+                        elif hasattr(job, 'trigger'):
+                            # Try to get next fire time from trigger
+                            next_fire = job.trigger.get_next_fire_time(None, datetime.now())
+                            if next_fire:
+                                next_run = next_fire.isoformat()
+                        
+                        jobs_list.append({
+                            "id": job.id,
+                            "next_run_time": next_run,
+                            "func_name": job.func.__name__ if hasattr(job, 'func') else None,
+                            "trigger": str(job.trigger) if hasattr(job, 'trigger') else None,
+                        })
+                    except Exception as e:
+                        continue
+                
+                return jobs_list
+                
+            except Exception as e:
+                return {
+                    "error": f"An error occurred while fetching scheduled notifications: {str(e)}"
+                }
 
 # Create a global scheduler instance
 notification_scheduler = NotificationScheduler()

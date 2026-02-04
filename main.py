@@ -9,7 +9,7 @@ from routes.meal_plan_routes import router as meal_plan_router
 from routes.invitation_routes import router as invitation_router
 from routes.genai_routes import router as genai_router
 from routes.notification_routes import router as notification_router
-from controllers.helpers.notification_scheduler import notification_scheduler
+from controllers.helpers.notification_scheduler import NotificationScheduler
 from utils.helper_utils import HelperUtils
 from connect import SessionLocal
 import logging
@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 helper_utils = HelperUtils()
 helper_utils.initialize_firebase()
+notification_scheduler = NotificationScheduler()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

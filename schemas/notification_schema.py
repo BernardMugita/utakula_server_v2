@@ -43,6 +43,20 @@ class NotificationSettings(BaseModel):
     frequency_before_meals: int
     notification_for: list[NotificationFor]
     
+class NotificationsTestSchema(BaseModel):
+    user_id: str
+    
+# Add to notification_schema.py
+
+class SendNotificationRequest(BaseModel):
+    meal: MealEnum  # breakfast, lunch, or supper
+    
+class ScheduledJob(BaseModel):
+    id: str
+    next_run_time: Union[str, None]
+    func_name: str
+    trigger: str
+    
 class NotificationFoods(BaseModel):
     name: str
     image_url: str
@@ -53,7 +67,12 @@ class MealPlanNotification(BaseModel):
     notification_message: str
     food_images: list = []
     
+class NotificationBody(BaseModel):
+    title: str
+    body: str
+    food_images: list[str]
+    
 class NotificationHandlerResponse(BaseModel):
     status: str
     message: str
-    payload: Union[str, MealPlanNotification, NotificationSettings, None, list] = None
+    payload: Union[str, MealPlanNotification, NotificationSettings, NotificationBody, None, list] = None

@@ -4,6 +4,8 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
 import logging
+import time
+import uuid
 
 logger = logging.getLogger(__name__)
 
@@ -470,8 +472,7 @@ class EmailService:
             message["Subject"] = f"Welcome to Utakula, {username}! 🎉"
             
             # Add headers to improve deliverability
-            import time
-            import uuid
+            
             domain = self.sender_email.split('@')[1] if '@' in self.sender_email else 'utakula.co.ke'
             message["Message-ID"] = f"<{uuid.uuid4()}@{domain}>"
             message["Date"] = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())

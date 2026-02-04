@@ -5,11 +5,13 @@ from sqlalchemy.orm import Session
 from models.meal_plan_model import MealPlanModel
 from models.user_model import UserModel
 from models.notification_model import NotificationModel
-from schemas.notification_schema import MealPlanNotification, NotificationFor, NotificationSettings, NotificationHandlerResponse
+from schemas.notification_schema import NotificationFor, NotificationSettings, NotificationHandlerResponse, NotificationsTestSchema, SendNotificationRequest
 from controllers.helpers.notification_helpers import NotiticationHelpers
 from utils.helper_utils import HelperUtils
 from controllers.helpers.notification_scheduler import NotificationScheduler
 from datetime import datetime
+from firebase_admin import messaging
+from schemas.notification_schema import NotificationsTestSchema
 
 notification_utils = NotiticationHelpers()
 utils = HelperUtils()
@@ -18,6 +20,92 @@ notification_scheduler = NotificationScheduler()
 class NotificationController:
     def __init__(self) -> None:
         pass
+    
+    def test_notification(self, testSchema: NotificationsTestSchema, db: Session):
+        user = db.query(UserModel).filter(UserModel.id == testSchema.user_id).first()
+    
+        if not user or not user.device_token:
+            return {"error": "User or token not found"}
+        
+        print(user.device_token)
+        
+        message = messaging.Message(
+            notification=messaging.Notification(
+                title="Test Notification",
+                body="Testing FCM"
+            ),
+            token=user.device_token
+        )
+        
+        print(message)
+        
+        try:
+            response = messaging.send(message)
+            return {"success": True, "response": response}
+        except Exception as e:
+            print(e)
+            return {"error": str(e)}
+        finally:
+            db.close()
+            
+    def send_meal_notification(
+        self, 
+        db: Session,
+        request: SendNotificationRequest,
+        authorization: str = Header(...)
+    ):
+        """
+        Send a notification for a specific meal
+        Called by Flutter local notifications
+        """
+        try:
+            if not authorization.startswith("Bearer "):
+                raise HTTPException(
+                    status_code=status.HTTP_403_FORBIDDEN,
+                    detail="Authorization header must start with 'Bearer '"
+                )
+            
+            token = authorization[7:]
+            payload = utils.validate_JWT(token)
+            
+            user_id = payload['user_id']
+            
+            # Send notification
+            result = notification_scheduler._send_scheduled_notification(
+                user_id=user_id,
+                meal=request.meal
+            )
+            
+            print(result.get("notification"))
+            
+            if result.get("success"):
+                return JSONResponse(
+                    status_code=status.HTTP_200_OK,
+                    content=NotificationHandlerResponse(
+                        status="success",
+                        message="Notification sent successfully.",
+                        payload=result.get("notification")
+                    ).model_dump()
+                )
+            else:
+                return JSONResponse(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    content=NotificationHandlerResponse(
+                        status="error",
+                        message=result.get("error", "Failed to send notification"),
+                        payload=None
+                    ).model_dump()
+                )
+                
+        except Exception as e:
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=NotificationHandlerResponse(
+                    status="error",
+                    message=f"Failed to send notification: {str(e)}",
+                    payload=None
+                ).model_dump()
+            )
 
     def set_user_notification_settings(
         self, 
@@ -90,7 +178,8 @@ class NotificationController:
                         'time_before_meals': settings.time_before_meals,
                         'frequency_before_meals': settings.frequency_before_meals,
                         'notification_for': settings.notification_for
-                    }
+                    },
+                    db=db
                 )
             else:
                 # Remove scheduled notifications if disabled

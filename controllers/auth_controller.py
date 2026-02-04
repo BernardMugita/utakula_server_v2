@@ -12,15 +12,18 @@ import random
 import os
 from dotenv import load_dotenv
 
+from utils.helper_utils import HelperUtils
+
 load_dotenv()
 
 SECRET_KEY = os.getenv("ACCESS_SECRET")
 ALGORITHM = "HS256"
 
 # Configure the password hashing context
-pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 email_service = EmailService()
+helpers = HelperUtils()
 
 class AuthController:
     def __init__(self):
@@ -181,6 +184,85 @@ class AuthController:
                     status="error",
                     message="Account authorization failed",
                     payload=f"{str(e)}"
+                ).dict()
+            )
+            
+    def google_sign_up(self, data: dict, db: Session) -> dict:
+        """Handle Google OAuth sign-up or sign-in.          
+        """ 
+        try: 
+            data = helpers.decode_google_jwt(data['token'])
+            if data.get("status") == "error":
+                return data
+            
+            data = data['data']
+            
+            required_fields = ["sub", "email", "name"]
+            
+            for field in required_fields:
+                if field not in data:
+                    return {
+                        "status": "error",
+                        "message": f"Missing required field: {field}"
+                    }
+            existing_google_user = db.query(UserModel).filter(
+                UserModel.google_oauth_id == data["sub"]
+            ).first()
+            
+            if existing_google_user:
+                token = self.generate_jwt_token(existing_google_user.to_dict())
+                return {
+                    "status": "success",
+                    "message": "Google OAuth login successful",
+                    "payload": token
+                }
+                
+            existing_email_user = db.query(UserModel).filter(
+                UserModel.email == data["email"]
+            ).first()
+            
+            if existing_email_user:
+                if existing_email_user.google_oauth_id:
+                    return{
+                        "status": "error",
+                        "message": "Email already linked with another Google account."
+                    }
+                else:
+                    existing_email_user.google_oauth_id = data["sub"]
+                    
+                    if existing_email_user._password_hash:
+                        existing_email_user.login_type = "both"
+                    else:
+                        existing_email_user.login_type = "google_oauth"
+                    token = self.generate_jwt_token(existing_email_user.to_dict())
+                    db.commit()
+                    db.refresh(existing_email_user)
+                    
+            new_user = UserModel(
+                email=data["email"],
+                username=data["name"],
+                google_oauth_id=data["sub"],
+                login_type="google_oauth"
+            )    
+            
+            db.add(new_user)
+            db.commit()
+            db.refresh(new_user)
+            token = self.generate_jwt_token(new_user.to_dict())
+                    
+            return {
+                "status": "success",
+                "message": "User registered via Google OAuth successfully",
+                "payload": token
+            }
+                    
+        except Exception as e:
+            return JSONResponse(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                content=AuthResponse(
+                    status="error",
+                    message="Error with Google OAuth sign-up",
+                    payload=str(e)
                 ).dict()
             )
 

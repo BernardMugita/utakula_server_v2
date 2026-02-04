@@ -30,6 +30,13 @@ async def authorize_user_account(user: UserAuthorize, db: Session = Depends(get_
         return auth_controller.authorize_user_account(user, db)
     except HTTPException as e:
         return e
+
+@router.post("/auth/google_oauth_login", response_model=AuthResponse)
+async def google_oauth_login(user: UserAuthorize, db: Session = Depends(get_db_connection)):
+    try:
+        return auth_controller.google_sign_up(user, db)
+    except HTTPException as e:
+        return e
     
 @router.post("/auth/generate_otp", response_model=AuthResponse)
 async def generate_otp_for_password_reset(otp_data: OTPRequest, db: Session = Depends(get_db_connection)):

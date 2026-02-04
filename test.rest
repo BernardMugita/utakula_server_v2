@@ -1,0 +1,21 @@
+###
+POST https://philanthropically-farsighted-malik.ngrok-free.dev/auth/authorize_account
+# Content-Type: "application/json"
+
+{
+    "username": "jeromemugita",
+    "password": "Big$teppa23"
+}
+
+###
+POST https://philanthropically-farsighted-malik.ngrok-free.dev/notifications/send
+# Content-Type: "application-json"
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA1NDUxNjB9.eiEOAWCw1VwVGYvaScrIG5OHUh_i-zYGbolx0jn6vv4
+
+{
+    "meal": "supper"
+}
+
+###
+POST https://philanthropically-farsighted-malik.ngrok-free.dev/notifications/get_notification_settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA1NDUxNjB9.eiEOAWCw1VwVGYvaScrIG5OHUh_i-zYGbolx0jn6vv4
