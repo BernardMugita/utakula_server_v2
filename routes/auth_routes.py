@@ -2,12 +2,20 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from models.user_model import UserModel
-from schemas.user_schema import AuthResponse, OTPRequest, ResetPasswordRequest, ResetPasswordRequest, UserAuthorize, UserCreate, RegisterResponse
+from schemas.user_schema import (
+    AuthResponse, 
+    GoogleOAuthRequest, 
+    OTPRequest, 
+    ResetPasswordRequest, 
+    UserAuthorize, 
+    UserCreate, 
+    RegisterResponse
+)
 from connect import SessionLocal
-from controllers.auth_controller import AuthController  # Import the controller
+from controllers.auth_controller import AuthController
 
 router = APIRouter()
-auth_controller = AuthController()  # Create a controller instance
+auth_controller = AuthController()
 
 # Dependency to get the SQLAlchemy session
 def get_db_connection():
@@ -32,21 +40,31 @@ async def authorize_user_account(user: UserAuthorize, db: Session = Depends(get_
         return e
 
 @router.post("/auth/google_oauth_login", response_model=AuthResponse)
-async def google_oauth_login(user: UserAuthorize, db: Session = Depends(get_db_connection)):
+async def google_oauth_login(
+    google_data: GoogleOAuthRequest,  # FIXED: Use correct schema
+    db: Session = Depends(get_db_connection)
+):
     try:
-        return auth_controller.google_sign_up(user, db)
+        data = google_data.model_dump()
+        return auth_controller.google_sign_up(data, db)
     except HTTPException as e:
         return e
     
 @router.post("/auth/generate_otp", response_model=AuthResponse)
-async def generate_otp_for_password_reset(otp_data: OTPRequest, db: Session = Depends(get_db_connection)):
+async def generate_otp_for_password_reset(
+    otp_data: OTPRequest, 
+    db: Session = Depends(get_db_connection)
+):
     try:
         return auth_controller.request_otp(db, otp_data)
     except HTTPException as e:
         return e
 
 @router.post("/auth/reset_password", response_model=AuthResponse)
-async def reset_user_password(reset_data: ResetPasswordRequest, db: Session = Depends(get_db_connection)):
+async def reset_user_password(
+    reset_data: ResetPasswordRequest, 
+    db: Session = Depends(get_db_connection)
+):
     try:
         return auth_controller.reset_user_password(db, reset_data)
     except HTTPException as e:

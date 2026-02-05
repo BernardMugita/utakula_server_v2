@@ -1,7 +1,16 @@
 # user_controller.py
 from sqlalchemy.orm import Session
 from models.user_model import UserModel
-from schemas.user_schema import OTPRequest, RegisterResponse, ResetPasswordRequest, UserAuthorize, UserCreate, UserRead, SignedUser, AuthResponse
+from schemas.user_schema import (
+    OTPRequest, 
+    RegisterResponse, 
+    ResetPasswordRequest, 
+    UserAuthorize, 
+    UserCreate, 
+    UserRead, 
+    SignedUser, 
+    AuthResponse
+)
 from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
@@ -11,6 +20,7 @@ import jwt
 import random
 import os
 from dotenv import load_dotenv
+import logging
 
 from utils.helper_utils import HelperUtils
 
@@ -18,6 +28,10 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("ACCESS_SECRET")
 ALGORITHM = "HS256"
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Configure the password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -37,30 +51,27 @@ class AuthController:
         """Verify a password against its hash."""
         return pwd_context.verify(plain_password, hashed_password)
 
-    def generate_jwt_token(self, user: SignedUser) -> str:
+    def generate_jwt_token(self, user: SignedUser | dict) -> str:
         """Generate a JWT token for the user."""
-        payload = {
-            "user_id": user.id,
-            "username": user.username,
-            "role": user.role,
-            "exp": datetime.utcnow() + timedelta(days=4)
-        }
+        # Handle both SignedUser objects and dicts
+        if isinstance(user, dict):
+            payload = {
+                "user_id": user.get("id"),
+                "username": user.get("username"),
+                "role": user.get("role"),
+                "exp": datetime.utcnow() + timedelta(days=4)
+            }
+        else:
+            payload = {
+                "user_id": user.id,
+                "username": user.username,
+                "role": user.role,
+                "exp": datetime.utcnow() + timedelta(days=4)
+            }
         return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
     def create_user_account(self, user_data: UserCreate, db: Session) -> UserRead:
-        """_summary_
-
-        Args:
-            user_data (UserCreate): _description_
-            db (Session): _description_
-
-        Raises:
-            HTTPException: _description_
-
-        Returns:
-            UserRead: _description_
-        """
-
+        """Create a new user account with email/password."""
         try:
             # Check if the user already exists by email or username
             existing_user = db.query(UserModel).filter(
@@ -118,16 +129,7 @@ class AuthController:
             )
             
     def authorize_user_account(self, user_data: UserAuthorize, db: Session) -> JSONResponse:
-        """_summary_
-
-        Args:
-            user_data (UserAuthorize): _description_
-            db (Session): _description_
-
-        Returns:
-            JSONResponse: _description_
-        """
-        
+        """Authorize user with username/password and return JWT token."""
         try:
             # Check if the user exists
             existing_user = db.query(UserModel).filter(
@@ -187,76 +189,155 @@ class AuthController:
                 ).dict()
             )
             
-    def google_sign_up(self, data: dict, db: Session) -> dict:
-        """Handle Google OAuth sign-up or sign-in.          
-        """ 
-        try: 
-            data = helpers.decode_google_jwt(data['token'])
-            if data.get("status") == "error":
-                return data
+    def google_sign_up(self, data: dict, db: Session) -> JSONResponse:
+        """
+        Handle Google OAuth sign-up or sign-in.
+        
+        Args:
+            data: Dictionary with 'token' key containing Google ID token
+            db: Database session
             
-            data = data['data']
+        Returns:
+            JSONResponse with status, message, and JWT token payload
+        """
+        logger.info("===== GOOGLE OAUTH REQUEST RECEIVED =====")
+        logger.info(f"Request data keys: {data.keys()}")
+        
+        try:
+            # Step 1: Validate that token exists
+            if 'token' not in data:
+                logger.error("Missing 'token' in request data")
+                return JSONResponse(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    content=AuthResponse(
+                        status="error",
+                        message="Missing required field: token",
+                        payload="No token provided"
+                    ).dict()
+                )
             
+            logger.info(f"Token received, length: {len(data['token'])}")
+            
+            # Step 2: Decode and validate Google JWT token
+            decoded_data = helpers.decode_google_jwt(data['token'])
+            logger.info(f"Token decode status: {decoded_data.get('status')}")
+            
+            if decoded_data.get("status") == "error":
+                logger.error(f"Token validation failed: {decoded_data.get('message')}")
+                return JSONResponse(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    content=AuthResponse(
+                        status="error",
+                        message=decoded_data.get("message", "Token validation failed"),
+                        payload="Invalid Google token"
+                    ).dict()
+                )
+            
+            user_data = decoded_data['data']
+            logger.info(f"Token validated for user: {user_data.get('email')}")
+            
+            # Step 3: Validate required fields in decoded token
             required_fields = ["sub", "email", "name"]
-            
             for field in required_fields:
-                if field not in data:
-                    return {
-                        "status": "error",
-                        "message": f"Missing required field: {field}"
-                    }
+                if field not in user_data:
+                    logger.error(f"Missing field in token: {field}")
+                    return JSONResponse(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        content=AuthResponse(
+                            status="error",
+                            message=f"Missing required field in token: {field}",
+                            payload=f"Token missing {field}"
+                        ).dict()
+                    )
+            
+            # Step 4: Check if user exists with this Google ID
             existing_google_user = db.query(UserModel).filter(
-                UserModel.google_oauth_id == data["sub"]
+                UserModel.google_oauth_id == user_data["sub"]
             ).first()
             
             if existing_google_user:
+                logger.info(f"Existing Google user found: {existing_google_user.email}")
                 token = self.generate_jwt_token(existing_google_user.to_dict())
-                return {
-                    "status": "success",
-                    "message": "Google OAuth login successful",
-                    "payload": token
-                }
-                
+                return JSONResponse(
+                    status_code=status.HTTP_200_OK,
+                    content=AuthResponse(
+                        status="success",
+                        message="Google OAuth login successful",
+                        payload=token
+                    ).dict()
+                )
+            
+            # Step 5: Check if email already exists (account linking)
             existing_email_user = db.query(UserModel).filter(
-                UserModel.email == data["email"]
+                UserModel.email == user_data["email"]
             ).first()
             
             if existing_email_user:
+                logger.info(f"Email exists, linking Google account: {existing_email_user.email}")
+                
                 if existing_email_user.google_oauth_id:
-                    return{
-                        "status": "error",
-                        "message": "Email already linked with another Google account."
-                    }
+                    # Email already linked to different Google account
+                    logger.warning(f"Email already linked to Google account: {user_data['email']}")
+                    return JSONResponse(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        content=AuthResponse(
+                            status="error",
+                            message="Email already linked with another Google account",
+                            payload="duplicate_google_link"
+                        ).dict()
+                    )
                 else:
-                    existing_email_user.google_oauth_id = data["sub"]
+                    # Link Google account to existing email user
+                    existing_email_user.google_oauth_id = user_data["sub"]
                     
                     if existing_email_user._password_hash:
                         existing_email_user.login_type = "both"
                     else:
                         existing_email_user.login_type = "google_oauth"
-                    token = self.generate_jwt_token(existing_email_user.to_dict())
+                    
                     db.commit()
                     db.refresh(existing_email_user)
                     
+                    token = self.generate_jwt_token(existing_email_user.to_dict())
+                    
+                    logger.info("Google account linked successfully")
+                    return JSONResponse(
+                        status_code=status.HTTP_200_OK,
+                        content=AuthResponse(
+                            status="success",
+                            message="Google account linked successfully",
+                            payload=token
+                        ).dict()
+                    )
+            
+            # Step 6: Create new user
+            logger.info(f"Creating new user via Google OAuth: {user_data['email']}")
             new_user = UserModel(
-                email=data["email"],
-                username=data["name"],
-                google_oauth_id=data["sub"],
+                email=user_data["email"],
+                username=user_data["name"],
+                google_oauth_id=user_data["sub"],
                 login_type="google_oauth"
-            )    
+            )
             
             db.add(new_user)
             db.commit()
             db.refresh(new_user)
+            
             token = self.generate_jwt_token(new_user.to_dict())
-                    
-            return {
-                "status": "success",
-                "message": "User registered via Google OAuth successfully",
-                "payload": token
-            }
+            
+            logger.info("New user created successfully via Google OAuth")
+            return JSONResponse(
+                status_code=status.HTTP_200_OK,
+                content=AuthResponse(
+                    status="success",
+                    message="User registered via Google OAuth successfully",
+                    payload=token
+                ).dict()
+            )
                     
         except Exception as e:
+            logger.exception("Exception in google_sign_up")
+            db.rollback()
             return JSONResponse(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 content=AuthResponse(
@@ -265,10 +346,9 @@ class AuthController:
                     payload=str(e)
                 ).dict()
             )
-
+        
     def request_otp(self, db: Session, otp_data: OTPRequest) -> JSONResponse:
         """Generate and return a one-time password (OTP) for the user."""
-        
         try: 
             otp = str(random.randint(100000, 999999))
         
@@ -290,7 +370,6 @@ class AuthController:
                         payload=f"{send_email_request.get('message')}"
                     ).dict()
                 )
-                
             
             existing_user._password_hash = otp
             db.commit()
@@ -316,17 +395,7 @@ class AuthController:
             )
 
     def reset_user_password(self, db: Session, reset_data: ResetPasswordRequest) -> JSONResponse:
-        """Reset the user's password.
-
-        Args:
-            db (Session): Database session.
-            email (str): User's email.
-            new_password (str): New password to set.
-
-        Returns:
-            JSONResponse: Response indicating success or failure.
-        """
-        
+        """Reset the user's password."""
         try:
             user = db.query(UserModel).filter(UserModel.email == reset_data.email).first()
             if not user:

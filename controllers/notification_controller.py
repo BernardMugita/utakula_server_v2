@@ -224,11 +224,31 @@ class NotificationController:
                 NotificationModel.user_id == payload['user_id']
             ).first()
             
+            
+            existing_user = db.query(UserModel).filter(
+                UserModel.id == payload['user_id']
+            ).first()
+            
             if not existing_settings:
                 raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND,
                     detail="Notification settings not found for the user."
                 )
+                
+            if existing_settings.notifications_enabled:
+                notification_scheduler.schedule_user_notifications(
+                    user_id=existing_user.id,
+                    device_token=existing_user.device_token,
+                    notification_settings={
+                        'time_before_meals': existing_settings.time_before_meals,
+                        'frequency_before_meals': existing_settings.frequency_before_meals,
+                        'notification_for': existing_settings.notification_for
+                    },
+                    db=db
+                )
+            else:
+                # Remove scheduled notifications if disabled
+                notification_scheduler.remove_user_notifications(existing_user.id)
             
             return JSONResponse(
                 status_code=status.HTTP_200_OK,

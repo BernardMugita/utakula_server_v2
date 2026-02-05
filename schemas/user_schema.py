@@ -17,6 +17,13 @@ class UserRead(BaseModel):
 class UserAuthorize(BaseModel):
     username: str
     password: str
+
+class GoogleOAuthRequest(BaseModel):
+    """Schema for Google OAuth sign-in/sign-up requests"""
+    token: str
+    name: str | None = None  # Optional: for debugging
+    email: str | None = None  # Optional: for debugging
+    sub: str | None = None  # Optional: for debugging
     
 class ResetPasswordRequest(BaseModel):
     email: EmailStr
@@ -60,4 +67,4 @@ class DeleteAccountResponse(BaseModel):
     payload: str
     
     class Config:
-        from_attributes = True 
+        from_attributes = True
