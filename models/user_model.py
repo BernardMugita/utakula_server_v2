@@ -26,7 +26,7 @@ class UserModel(Base):
     username: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
     role: Mapped[str] = mapped_column(String(50), nullable=False, default="user")
     email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
-    _password_hash: Mapped[str] = mapped_column(String(100), name="password", nullable=False)
+    _password_hash: Mapped[str] = mapped_column(String(100), name="password", nullable=True)
     device_token: Mapped[str] = mapped_column(String(255), nullable=True)
     
     #google oauth fields
