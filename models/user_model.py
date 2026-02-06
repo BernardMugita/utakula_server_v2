@@ -63,3 +63,15 @@ class UserModel(Base):
     def verify_password(self, password: str) -> bool:
         """Verifies the provided password against the stored hash."""
         return pwd_context.verify(password, self._password_hash)
+    
+    def to_dict(self):
+        new_user = {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "role": self.role,
+            "device_token": self.device_token,
+            "google_oauth_id": self.google_oauth_id
+        }
+        
+        return new_user
