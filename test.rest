@@ -1,10 +1,11 @@
 ###
-POST https://philanthropically-farsighted-malik.ngrok-free.dev/auth/authorize_account
+POST https://utakulaserver.arifulib.co.ke/auth/authorize_account
+# POST https://philanthropically-farsighted-malik.ngrok-free.dev/auth/authorize_account
 # Content-Type: "application/json"
 
 {
-    "username": "jeromemugita",
-    "password": "Big$teppa23"
+    "username": "demo.utakula",
+    "password": "utakula.demo"
 }
 
 ###
@@ -26,5 +27,6 @@ POST https://philanthropically-farsighted-malik.ngrok-free.dev/users/get_user_ac
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA1NDUxNjB9.eiEOAWCw1VwVGYvaScrIG5OHUh_i-zYGbolx0jn6vv4
 
 ###
+# POST https://utakulaserver.arifulib.co.ke/notifications/get_scheduled_jobs
 POST https://philanthropically-farsighted-malik.ngrok-free.dev/notifications/get_scheduled_jobs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA1NDUxNjB9.eiEOAWCw1VwVGYvaScrIG5OHUh_i-zYGbolx0jn6vv4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA3NDgyOTl9.aPOnZ2YTG1ksds4P3CWRUO-GsCyiE8pki1bFIW_tNKk
