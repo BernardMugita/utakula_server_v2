@@ -39,7 +39,7 @@ class HelperUtils:
         logger.info("Initializing Firebase Admin SDK")
         try:
             if not firebase_admin._apps:
-                cred = credentials.Certificate("/home/jeromemugita/Documents/Code/utakula_server/firebaseCreds.json")
+                cred = credentials.Certificate(r"C:\Users\mugit\Documents\code\utakula_server_v2\firebaseCreds.json")
                 firebase_admin.initialize_app(cred)
                 logger.info("Firebase Admin SDK initialized successfully")
             else:

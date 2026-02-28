@@ -7,7 +7,7 @@ from routes.food_routes import router as food_router
 from routes.calorie_routes import router as calorie_router
 from routes.meal_plan_routes import router as meal_plan_router
 from routes.invitation_routes import router as invitation_router
-from routes.genai_routes import router as genai_router
+# from routes.genai_routes import router as genai_router
 from routes.notification_routes import router as notification_router
 from controllers.helpers.notification_scheduler import NotificationScheduler
 from utils.helper_utils import HelperUtils
@@ -60,4 +60,4 @@ app.include_router(calorie_router)
 app.include_router(meal_plan_router)
 app.include_router(notification_router)
 app.include_router(invitation_router)
-app.include_router(genai_router)
+# app.include_router(genai_router)
