@@ -74,7 +74,7 @@ class PaymentHistoryModel(Base):
         comment="Why payment failed (if applicable)"
     )
     
-    metadata: Mapped[dict] = mapped_column(
+    payment_metadata: Mapped[dict] = mapped_column(
         JSON,
         nullable=True,
         default=dict,

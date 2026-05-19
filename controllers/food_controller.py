@@ -156,6 +156,7 @@ class FoodController:
                     image_url=food_data.image_url,
                     macro_nutrient=food_data.macro_nutrient,
                     meal_type=food_data.meal_type,
+                    reference_portion_grams=food_data.reference_portion_grams,
                     dietary_tags=dietary_tags_list,
                     allergens=allergens_list,
                     suitable_for_conditions=conditions_list
@@ -180,6 +181,7 @@ class FoodController:
                     image_url=new_food.image_url,
                     macro_nutrient=new_food.macro_nutrient,
                     meal_type=new_food.meal_type.value if hasattr(new_food.meal_type, 'value') else new_food.meal_type,
+                    reference_portion_grams=new_food.reference_portion_grams,
                     dietary_tags=dietary_tags_list,
                     allergens=allergens_list,
                     suitable_for_conditions=conditions_list,

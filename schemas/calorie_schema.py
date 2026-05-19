@@ -32,7 +32,7 @@ class FoodWithCaloriesCreate(BaseModel):
 
 class CalorieRead(BaseModel):
     calorie_id: str = Field(..., alias='id')
-    food_id: str
+    food_id: str | None
     total: int
     breakdown: BreakdownSchema
     

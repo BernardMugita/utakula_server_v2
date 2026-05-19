@@ -33,7 +33,6 @@ async def start_trial(
 
 @router.post("/subscriptions/check_status", response_model=SubscriptionStatusResponse)
 async def check_subscription_status(
-    user_data: SubscriptionStatusCheck = Body(...),
     db: Session = Depends(get_db_connection),
     authorization: str = Header(...)
 ):
@@ -41,7 +40,7 @@ async def check_subscription_status(
     Check user's subscription status and feature access.
     Call this on app launch and before accessing premium features.
     """
-    return subscription_controller.check_subscription_status(user_data, db, authorization)
+    return subscription_controller.check_subscription_status(db, authorization)
 
 @router.post("/subscriptions/get_user_subscription", response_model=RetrieveSubscriptionResponse)
 async def get_user_subscription(

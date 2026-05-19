@@ -25,11 +25,12 @@ def get_db_connection():
     finally:
         db.close()
 
-@router.post("/auth/create_account/", response_model=RegisterResponse)
+@router.post("/auth/create_account", response_model=RegisterResponse)
 async def create_user(user: UserCreate, db: Session = Depends(get_db_connection)):
     try:
         return auth_controller.create_user_account(user, db)
     except HTTPException as e:
+        print("Error" + e)
         raise e 
 
 @router.post("/auth/authorize_account", response_model=AuthResponse)

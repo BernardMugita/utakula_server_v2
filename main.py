@@ -9,6 +9,9 @@ from routes.meal_plan_routes import router as meal_plan_router
 from routes.invitation_routes import router as invitation_router
 # from routes.genai_routes import router as genai_router
 from routes.notification_routes import router as notification_router
+from routes.membership_routes import router as membership_router
+from routes.payment_routes import router as payment_router
+from routes.subscription_routes import router as subscription_router
 from controllers.helpers.notification_scheduler import NotificationScheduler
 from utils.helper_utils import HelperUtils
 from connect import SessionLocal
@@ -61,3 +64,6 @@ app.include_router(meal_plan_router)
 app.include_router(notification_router)
 app.include_router(invitation_router)
 # app.include_router(genai_router)
+app.include_router(membership_router)
+app.include_router(payment_router)
+app.include_router(subscription_router)

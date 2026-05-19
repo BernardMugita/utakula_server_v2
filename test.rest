@@ -1,11 +1,32 @@
+GET https://api.utakula.co.ke
+
 ###
-POST https://utakulaserver.arifulib.co.ke/auth/authorize_account
+POST https://api.utakula.co.ke/auth/create_account
 # POST https://philanthropically-farsighted-malik.ngrok-free.dev/auth/authorize_account
-# Content-Type: "application/json"
+Content-Type: application/json
 
 {
     "username": "demo.utakula",
+    "email": "mugitajeromebernard@gmail.com",
     "password": "utakula.demo"
+}
+
+###
+POST http://127.0.0.1:8000/auth/authorize_account
+# POST https://philanthropically-farsighted-malik.ngrok-free.dev/auth/authorize_account
+Content-Type: application/json
+
+{
+    "username": "jeromemugita",
+    "password": "Big$teppa23"
+}
+
+###
+POST http://127.0.0.1:8000/auth/generate_otp
+Content-Type: application/json
+
+{
+    "email": "mugita68@gmail.com"
 }
 
 ###
@@ -23,10 +44,3841 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczN
 
 
 ###
-POST https://philanthropically-farsighted-malik.ngrok-free.dev/users/get_user_account
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA1NDUxNjB9.eiEOAWCw1VwVGYvaScrIG5OHUh_i-zYGbolx0jn6vv4
+POST https://api.utakula.co.ke/users/get_user_account
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzgwMWVkYjAtNWYwNS00N2YxLWE2MjMtZTg2M2UzNzVkODdjIiwidXNlcm5hbWUiOiJkZW1vX3V0YWt1bGEiLCJyb2xlIjoidXNlciIsImV4cCI6MTc3NDk2MTU3NX0.0T-OrM4BMfsB50iJ8FuXU9RZyjqgzjqD4-5DGiaT2Ug
 
 ###
 # POST https://utakulaserver.arifulib.co.ke/notifications/get_scheduled_jobs
 POST https://philanthropically-farsighted-malik.ngrok-free.dev/notifications/get_scheduled_jobs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTczNzFhMGMtNDJjOC00ODk1LWE4OWMtM2EwNmVmMjI0NDE2IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzA3NDgyOTl9.aPOnZ2YTG1ksds4P3CWRUO-GsCyiE8pki1bFIW_tNKk
+
+###
+POST https://api.utakula.co.ke/foods/get_all_foods
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2U5OWZiNjgtM2Q2YS00NzE3LTkzNWEtOTAxN2IyNWNjODE5IiwidXNlcm5hbWUiOiJqZXJvbWVtdWdpdGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzkwMjI5MDV9.WYIUI1nRfYDnT_liDVDW7-6bFKPSyKWzfa2i_8Y54VE
+
+###
+POST https://api.utakula.co.ke/foods/bulk_add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzgwMWVkYjAtNWYwNS00N2YxLWE2MjMtZTg2M2UzNzVkODdjIiwidXNlcm5hbWUiOiJkZW1vX3V0YWt1bGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzQ5NjE5ODZ9.9CI7jpzZqe81eQkCQ4O6gWrPDuXEmq1S0Z9OqjwcPII
+
+[
+    {
+      "food_id": "06298d8f-6895-4f65-9324-534b249867a0",
+      "name": "Mkate wa Kumimina (Coastal Bread)",
+      "calories": {
+        "id": "558bd5be-5796-4384-abb3-7a2a79c9effd",
+        "food_id": "06298d8f-6895-4f65-9324-534b249867a0",
+        "total": 280,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 52.0,
+            "calories": 208.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 7.5,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 4.8,
+            "calories": 43.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.8,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mkate-wa-kumimina.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "0845a7e3-d61c-4208-afe8-dd170cd0225d",
+      "name": "Tilapia (Grilled)",
+      "calories": {
+        "id": "a7ed9c7f-9f87-423c-a1e3-fb80d1804c78",
+        "food_id": "0845a7e3-d61c-4208-afe8-dd170cd0225d",
+        "total": 128,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 26.2,
+            "calories": 105.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 2.7,
+            "calories": 24.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "tilapia.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "pescatarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "0a9b8297-4911-4e01-a71f-c06999affdf1",
+      "name": "Mkate Mayai (Egg Bread)",
+      "calories": {
+        "id": "9b42998d-b2c4-48f6-9928-462b52b89c38",
+        "food_id": "0a9b8297-4911-4e01-a71f-c06999affdf1",
+        "total": 290,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 35.0,
+            "calories": 140.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 12.5,
+            "calories": 50.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 11.0,
+            "calories": 99.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.5,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mkate-mayai.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat",
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "0b6f2ff7-44f1-481d-9f14-19b64ec444d4",
+      "name": "Githeri (Maize & Beans)",
+      "calories": {
+        "id": "bee2c72a-a607-461a-b689-434c3e7b5747",
+        "food_id": "0b6f2ff7-44f1-481d-9f14-19b64ec444d4",
+        "total": 140,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 25.0,
+            "calories": 100.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 6.5,
+            "calories": 26.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 1.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 5.0,
+            "calories": 10.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "githeri.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "dairy_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease",
+        "lactose_intolerance"
+      ]
+    },
+    {
+      "food_id": "0d64c4e5-714a-4fe2-a647-90bec45a8df3",
+      "name": "Orange",
+      "calories": {
+        "id": "5500e073-d412-48df-87d8-de9a939ea3fc",
+        "food_id": "0d64c4e5-714a-4fe2-a647-90bec45a8df3",
+        "total": 47,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 12.0,
+            "calories": 48.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.9,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "orange.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "113525bf-3850-4575-a8f8-1f9c0415ef5b",
+      "name": "Irio (Mashed Potatoes with Peas and Corn)",
+      "calories": {
+        "id": "d00e137f-8f74-4c28-a645-7b98ab9e3ef4",
+        "food_id": "113525bf-3850-4575-a8f8-1f9c0415ef5b",
+        "total": 127,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 17.0,
+            "calories": 68.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.0,
+            "calories": 16.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 5.0,
+            "calories": 45.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 3.0,
+            "calories": 6.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "irio.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "129ea8f0-b6e7-492b-8b64-b49ba736838a",
+      "name": "Kachumbari (Tomato Onion Salad)",
+      "calories": {
+        "id": "79a34f39-64c7-450d-9106-bf1fbdb51dd8",
+        "food_id": "129ea8f0-b6e7-492b-8b64-b49ba736838a",
+        "total": 35,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 7.8,
+            "calories": 31.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.2,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.0,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "kachumbari.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "side dish",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "12a531cc-3067-4615-a626-97a4d932ca8e",
+      "name": "Rice (White, Cooked)",
+      "calories": {
+        "id": "53e1de7b-3be2-42c0-a0d0-d5f5799ee673",
+        "food_id": "12a531cc-3067-4615-a626-97a4d932ca8e",
+        "total": 130,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 28.2,
+            "calories": 113.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.7,
+            "calories": 11.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.4,
+            "calories": 1.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "white-rice.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "157678ab-4ffb-44ea-9144-aea39fb756bf",
+      "name": "Avocado",
+      "calories": {
+        "id": "86010753-e387-4b7a-afe1-ce873bb20b76",
+        "food_id": "157678ab-4ffb-44ea-9144-aea39fb756bf",
+        "total": 160,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 8.5,
+            "calories": 34.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.0,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 14.7,
+            "calories": 132.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 6.7,
+            "calories": 13.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "avocado.png",
+      "macro_nutrient": "Fat",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "18030673-0cc6-4c29-a21e-986b1ddfbfec",
+      "name": "Sausage (Pork)",
+      "calories": {
+        "id": "200077e0-fc3c-44a8-8e67-6fbdb50ceccb",
+        "food_id": "18030673-0cc6-4c29-a21e-986b1ddfbfec",
+        "total": 301,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 1.9,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 12.0,
+            "calories": 48.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 27.0,
+            "calories": 243.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "sausage.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [],
+      "allergens": [],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "19fc95cb-76f1-4ec8-8682-bfbed19f1593",
+      "name": "Potato (Boiled)",
+      "calories": {
+        "id": "25b8c1bb-4905-4639-b78b-30971106c969",
+        "food_id": "19fc95cb-76f1-4ec8-8682-bfbed19f1593",
+        "total": 87,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 20.1,
+            "calories": 80.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.9,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.8,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "potato.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "1a10ff92-134b-4eff-9d7e-448a489d504f",
+      "name": "Nyama Choma (Goat)",
+      "calories": {
+        "id": "cf305dfb-e977-49e5-8ac3-38e14b6c93c9",
+        "food_id": "1a10ff92-134b-4eff-9d7e-448a489d504f",
+        "total": 143,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 27.1,
+            "calories": 108.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.0,
+            "calories": 27.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "nyama-choma.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "halal"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension"
+      ]
+    },
+    {
+      "food_id": "2223a835-140b-4140-9612-a17138b862b1",
+      "name": "Cassava (Boiled)",
+      "calories": {
+        "id": "94e574e3-9412-49ad-b876-3fc680be9ba4",
+        "food_id": "2223a835-140b-4140-9612-a17138b862b1",
+        "total": 160,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 38.1,
+            "calories": 152.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.4,
+            "calories": 6.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.8,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "cassava.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "235e4e65-cbc3-4701-b1ae-25a316d7b82b",
+      "name": "Cowpeas (Black-eyed Peas, Cooked)",
+      "calories": {
+        "id": "8dbf1534-e0e6-4467-9495-28efbc43848e",
+        "food_id": "235e4e65-cbc3-4701-b1ae-25a316d7b82b",
+        "total": 116,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 20.8,
+            "calories": 83.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 7.7,
+            "calories": 31.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 6.5,
+            "calories": 13.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "cowpeas.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "27279d39-72da-4206-805b-f98ad00c163d",
+      "name": "Orange Juice",
+      "calories": {
+        "id": "7a55636f-8136-43ef-9d78-ec2cd81938aa",
+        "food_id": "27279d39-72da-4206-805b-f98ad00c163d",
+        "total": 45,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 10.4,
+            "calories": 42.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.7,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.2,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "orange-juice.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "2d68ce5d-3259-47ab-8bc8-b0b5bd736c6e",
+      "name": "Cinnamon Roll",
+      "calories": {
+        "id": "e5742a9a-994e-49c9-b2e9-a93a8ecfbd34",
+        "food_id": "2d68ce5d-3259-47ab-8bc8-b0b5bd736c6e",
+        "total": 286,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 47.0,
+            "calories": 188.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.5,
+            "calories": 18.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 12.0,
+            "calories": 108.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.5,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "cinnamon-rolls.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat",
+        "dairy",
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "354c46c0-634d-468d-89aa-6aea18eebcfc",
+      "name": "Peanuts (Roasted)",
+      "calories": {
+        "id": "2d345e66-1282-459d-bd1d-9384aedd4a7e",
+        "food_id": "354c46c0-634d-468d-89aa-6aea18eebcfc",
+        "total": 567,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 16.1,
+            "calories": 64.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 25.8,
+            "calories": 103.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 49.2,
+            "calories": 443.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 8.5,
+            "calories": 17.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "peanuts.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [
+        "peanuts"
+      ],
+      "suitable_for_conditions": [
+        "diabetes",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "35adf5f4-56cf-4be0-a476-598a996f9ef6",
+      "name": "Kunde (Cowpea Leaves)",
+      "calories": {
+        "id": "e2f7b354-1e72-4c7d-8ed4-0cf402c42b67",
+        "food_id": "35adf5f4-56cf-4be0-a476-598a996f9ef6",
+        "total": 42,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 7.6,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.8,
+            "calories": 11.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.2,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "kunde.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "36008853-461a-40e1-8ee2-a80caaaa35b6",
+      "name": "Maharagwe (Red Beans)",
+      "calories": {
+        "id": "b420c731-e3bf-4577-88c1-7252520c6e9f",
+        "food_id": "36008853-461a-40e1-8ee2-a80caaaa35b6",
+        "total": 127,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 22.8,
+            "calories": 91.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 8.7,
+            "calories": 35.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 6.4,
+            "calories": 13.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "maharagwe.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "36c7f8ca-1181-473e-84e8-cc7c4c48cebe",
+      "name": "Carrots (Cooked)",
+      "calories": {
+        "id": "7e1d7b00-5538-425d-a129-a3d9a64d696c",
+        "food_id": "36c7f8ca-1181-473e-84e8-cc7c4c48cebe",
+        "total": 35,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 8.2,
+            "calories": 33.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.8,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 3.0,
+            "calories": 6.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "carrots.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "39ba9735-1dae-4e0b-9122-40d1a0e1d894",
+      "name": "Cabbage (Cooked)",
+      "calories": {
+        "id": "60ef9731-edf5-425b-bfd2-466f820339fb",
+        "food_id": "39ba9735-1dae-4e0b-9122-40d1a0e1d894",
+        "total": 23,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 5.5,
+            "calories": 22.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.3,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.0,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "cabbage.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "4558989e-38a0-4ca6-b993-3f9e6ec489a8",
+      "name": "Mahamri (Coconut Doughnut)",
+      "calories": {
+        "id": "d3e54db6-0cd8-4717-92d4-f0064b384dac",
+        "food_id": "4558989e-38a0-4ca6-b993-3f9e6ec489a8",
+        "total": 315,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 45.0,
+            "calories": 180.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 6.2,
+            "calories": 25.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 12.5,
+            "calories": 113.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.5,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mahamri.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "495cfab5-4947-496d-8e1b-600a46269646",
+      "name": "Ugali (Maize Meal)",
+      "calories": {
+        "id": "24a0a532-fbc9-4104-be3d-d3e55015beaf",
+        "food_id": "495cfab5-4947-496d-8e1b-600a46269646",
+        "total": 158,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 38.0,
+            "calories": 152.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.0,
+            "calories": 16.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 1.8,
+            "calories": 16.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.5,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "ugali.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten free",
+        "dairy free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac disease",
+        "lactose intolerance"
+      ]
+    },
+    {
+      "food_id": "4b17dd85-5690-49f6-8cbb-bd28e489dde1",
+      "name": "Groundnuts (Boiled)",
+      "calories": {
+        "id": "fec9a029-ddd2-4c4b-95a9-5de2972284a2",
+        "food_id": "4b17dd85-5690-49f6-8cbb-bd28e489dde1",
+        "total": 318,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 21.3,
+            "calories": 85.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 13.5,
+            "calories": 54.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 22.0,
+            "calories": 198.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 6.0,
+            "calories": 12.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "groundnuts.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [
+        "peanuts"
+      ],
+      "suitable_for_conditions": [
+        "diabetes",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "4c14abf6-0978-4555-bb02-1eeccb724ee4",
+      "name": "Scone",
+      "calories": {
+        "id": "40594430-a124-42ba-bc53-8f2cba06ba56",
+        "food_id": "4c14abf6-0978-4555-bb02-1eeccb724ee4",
+        "total": 353,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 45.0,
+            "calories": 180.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 9.2,
+            "calories": 37.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 14.9,
+            "calories": 134.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.6,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "tea-scones.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat",
+        "dairy",
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "4d24ec8c-6ac3-4974-a75d-28b91994cdb5",
+      "name": "Tea with Milk",
+      "calories": {
+        "id": "24133394-1c65-4473-93b5-b75629b9ae65",
+        "food_id": "4d24ec8c-6ac3-4974-a75d-28b91994cdb5",
+        "total": 10,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 1.5,
+            "calories": 6.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.4,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "tea.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "dairy"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "4f0e6765-e593-44ed-83cb-87b13d20129a",
+      "name": "Managu (African Nightshade)",
+      "calories": {
+        "id": "848cc903-1415-4d5b-8667-fbdfb0ab5321",
+        "food_id": "4f0e6765-e593-44ed-83cb-87b13d20129a",
+        "total": 36,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 6.2,
+            "calories": 25.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.2,
+            "calories": 13.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.8,
+            "calories": 6.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "managu.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "50a27dc3-db47-4738-9bf1-b661ecf95c3b",
+      "name": "Viazi Karai (Spiced Potato)",
+      "calories": {
+        "id": "e9bb614a-50a2-4ed3-a7f0-e92857b9c93b",
+        "food_id": "50a27dc3-db47-4738-9bf1-b661ecf95c3b",
+        "total": 195,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 28.0,
+            "calories": 112.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 8.0,
+            "calories": 72.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.8,
+            "calories": 6.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "viazi-karai.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "50af8118-1ceb-438a-8684-0700d8a0b54b",
+      "name": "Ndengu (Green Grams/Mung Beans)",
+      "calories": {
+        "id": "a6245d3d-d3a7-4fa5-8d36-4e05d095782c",
+        "food_id": "50af8118-1ceb-438a-8684-0700d8a0b54b",
+        "total": 105,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 19.2,
+            "calories": 77.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 7.0,
+            "calories": 28.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 7.6,
+            "calories": 15.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "ndengu.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "54baa8bc-69be-4165-beb8-9df8b9f638ba",
+      "name": "Omena (Silver Cyprinid)",
+      "calories": {
+        "id": "88fb47e2-66af-4bf3-8fa8-7ab3f0925251",
+        "food_id": "54baa8bc-69be-4165-beb8-9df8b9f638ba",
+        "total": 210,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 29.0,
+            "calories": 116.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 10.0,
+            "calories": 90.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "omena.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "pescatarian",
+        "halal"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension"
+      ]
+    },
+    {
+      "food_id": "54de255c-e6ff-4281-9257-fcc65fc32ae2",
+      "name": "Mandazi",
+      "calories": {
+        "id": "fd82b3e3-048e-4923-ae65-3e684eba3701",
+        "food_id": "54de255c-e6ff-4281-9257-fcc65fc32ae2",
+        "total": 320,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 48.0,
+            "calories": 192.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 7.7,
+            "calories": 31.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 10.3,
+            "calories": 93.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.6,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mandazi.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "55df1cee-9784-4103-b687-34fc7f92bac8",
+      "name": "Croissant",
+      "calories": {
+        "id": "08090acf-e065-4f91-9724-89957b1bf43b",
+        "food_id": "55df1cee-9784-4103-b687-34fc7f92bac8",
+        "total": 231,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 26.0,
+            "calories": 104.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.9,
+            "calories": 20.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 12.0,
+            "calories": 108.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.6,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "croissant.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat",
+        "dairy",
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "588b3175-604f-4b1a-91ac-dcee6855e1b6",
+      "name": "Matumbo (Tripe Stew)",
+      "calories": {
+        "id": "fd343f99-3386-4f17-99ca-3def9a00191a",
+        "food_id": "588b3175-604f-4b1a-91ac-dcee6855e1b6",
+        "total": 94,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 18.0,
+            "calories": 72.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 2.5,
+            "calories": 23.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "matumbo.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "halal"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension"
+      ]
+    },
+    {
+      "food_id": "58f38623-d892-48f8-9e6e-f9f0767e7285",
+      "name": "Arrow Roots (Boiled)",
+      "calories": {
+        "id": "401c233f-a482-432a-8970-d9d654bd77e3",
+        "food_id": "58f38623-d892-48f8-9e6e-f9f0767e7285",
+        "total": 112,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 26.0,
+            "calories": 104.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.2,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 4.1,
+            "calories": 8.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "arrow-roots.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "620fea10-352f-437d-bb95-7f1065d93363",
+      "name": "Bacon (Cooked)",
+      "calories": {
+        "id": "00856e86-91ec-4f32-8874-794773fcef97",
+        "food_id": "620fea10-352f-437d-bb95-7f1065d93363",
+        "total": 541,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 1.4,
+            "calories": 6.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 37.0,
+            "calories": 148.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 42.0,
+            "calories": 378.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "bacon.png",
+      "macro_nutrient": "Fat",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [],
+      "allergens": [],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "63bf9110-a547-414b-8e0c-cbdf856cf43b",
+      "name": "Terere (Amaranth Leaves)",
+      "calories": {
+        "id": "cd3a83fe-2876-430b-a9ec-055b8773ba31",
+        "food_id": "63bf9110-a547-414b-8e0c-cbdf856cf43b",
+        "total": 23,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 4.0,
+            "calories": 16.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.5,
+            "calories": 10.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.1,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "terere.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "651c62bc-fc11-464e-85cd-76ba5df78bda",
+      "name": "Chips Mayai (French Fries Omelette)",
+      "calories": {
+        "id": "522ef4bf-d162-4edd-856e-e1d5582e3e80",
+        "food_id": "651c62bc-fc11-464e-85cd-76ba5df78bda",
+        "total": 365,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 42.0,
+            "calories": 168.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 14.5,
+            "calories": 58.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 16.0,
+            "calories": 144.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 3.2,
+            "calories": 6.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "chips-mayai.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "67ff1cdb-8223-4da9-8104-1ddc0b98b20a",
+      "name": "Spaghetti (Cooked)",
+      "calories": {
+        "id": "bc401dc3-5763-4c0c-ac4a-968b66ad8585",
+        "food_id": "67ff1cdb-8223-4da9-8104-1ddc0b98b20a",
+        "total": 158,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 31.0,
+            "calories": 124.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 5.8,
+            "calories": 23.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.9,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.8,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "spaghetti.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "692f60c7-c361-437f-ab37-a482799a10eb",
+      "name": "Black Coffee",
+      "calories": {
+        "id": "38606a7d-832a-4f76-8e16-c1492173eb7e",
+        "food_id": "692f60c7-c361-437f-ab37-a482799a10eb",
+        "total": 2,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.3,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "coffee.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "69a0aeaa-3b77-43a4-ae28-3347e887b30a",
+      "name": "Cucumber (Fresh)",
+      "calories": {
+        "id": "6188976c-9a81-4982-8fe1-b70a818bbfd0",
+        "food_id": "69a0aeaa-3b77-43a4-ae28-3347e887b30a",
+        "total": 15,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.6,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.7,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.5,
+            "calories": 1.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "cucumber.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "6f09fe6c-d904-4b30-88ca-ccf5de564b52",
+      "name": "Matoke (Plantain)",
+      "calories": {
+        "id": "1030488f-f068-4703-b4e4-c450aa601f78",
+        "food_id": "6f09fe6c-d904-4b30-88ca-ccf5de564b52",
+        "total": 122,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 31.9,
+            "calories": 128.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.3,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.3,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "matoke.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "726e73bb-d320-44e1-9a9c-37401ec8bcec",
+      "name": "Bhajia (Potato Fritters)",
+      "calories": {
+        "id": "6cea1788-371d-4c9c-8fe1-24b1e95ed0a3",
+        "food_id": "726e73bb-d320-44e1-9a9c-37401ec8bcec",
+        "total": 245,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 32.0,
+            "calories": 128.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 5.2,
+            "calories": 21.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 11.0,
+            "calories": 99.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "bhajia.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "7ba3423e-e96f-4a47-98e6-4327c738d29b",
+      "name": "Mango",
+      "calories": {
+        "id": "f58234ac-93cb-4658-bb19-6b3113655add",
+        "food_id": "7ba3423e-e96f-4a47-98e6-4327c738d29b",
+        "total": 60,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 15.0,
+            "calories": 60.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.8,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.6,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mango.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "828bc3f5-c3e0-46a0-93b5-131c67ff6f4d",
+      "name": "Kidney Beans (Cooked)",
+      "calories": {
+        "id": "b712e876-2c69-4442-82c1-cdc1a5b3f4c7",
+        "food_id": "828bc3f5-c3e0-46a0-93b5-131c67ff6f4d",
+        "total": 127,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 22.8,
+            "calories": 91.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 8.7,
+            "calories": 35.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 6.4,
+            "calories": 13.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "beans.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "85e70f45-c8f3-4f26-8b32-c967cf9b5ef9",
+      "name": "Kuku (Chicken Grilled)",
+      "calories": {
+        "id": "383e8388-dc26-43ef-bebc-581a23d966a1",
+        "food_id": "85e70f45-c8f3-4f26-8b32-c967cf9b5ef9",
+        "total": 165,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 31.0,
+            "calories": 124.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.6,
+            "calories": 32.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "chicken.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol"
+      ]
+    },
+    {
+      "food_id": "8bbfe5fe-034d-4480-8548-814e43f642f4",
+      "name": "Beef (Cooked)",
+      "calories": {
+        "id": "df45ae34-8ce4-4b94-b481-3f0dfc20864f",
+        "food_id": "8bbfe5fe-034d-4480-8548-814e43f642f4",
+        "total": 250,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 26.0,
+            "calories": 104.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 15.0,
+            "calories": 135.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "meat.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "gluten_free",
+        "dairy_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac_disease",
+        "lactose_intolerance"
+      ]
+    },
+    {
+      "food_id": "8fe211e2-10a7-4024-bbb7-ad16d9ab285c",
+      "name": "Pilau (Spiced Rice)",
+      "calories": {
+        "id": "86f49ee0-ff57-458b-880e-87296a8cbdda",
+        "food_id": "8fe211e2-10a7-4024-bbb7-ad16d9ab285c",
+        "total": 150,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 28.0,
+            "calories": 112.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.5,
+            "calories": 32.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.8,
+            "calories": 2.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "pilau.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "dairy_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac_disease",
+        "lactose_intolerance"
+      ]
+    },
+    {
+      "food_id": "901910e0-60e9-410e-9ceb-471b58ed3c87",
+      "name": "Lentils (Cooked)",
+      "calories": {
+        "id": "ac5f73a7-48ed-4023-b288-620c1b13bb16",
+        "food_id": "901910e0-60e9-410e-9ceb-471b58ed3c87",
+        "total": 116,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 20.1,
+            "calories": 80.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 9.0,
+            "calories": 36.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 7.9,
+            "calories": 16.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "lentils.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "956ed570-e5fb-46f2-b511-18a540bdf926",
+      "name": "Banana",
+      "calories": {
+        "id": "73555428-59a6-46a2-b9df-7c5ba376c7c7",
+        "food_id": "956ed570-e5fb-46f2-b511-18a540bdf926",
+        "total": 89,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 23.0,
+            "calories": 92.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.1,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.6,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "banana.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "a3fd0132-3722-48d6-a921-0b02973c6106",
+      "name": "Green Peas (Cooked)",
+      "calories": {
+        "id": "8d63d3d2-8b12-4a1a-b631-0e7820105eca",
+        "food_id": "a3fd0132-3722-48d6-a921-0b02973c6106",
+        "total": 84,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 15.6,
+            "calories": 62.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 5.4,
+            "calories": 22.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 5.5,
+            "calories": 11.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "green-peas.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "a573d9e1-23f2-403d-aa98-6e85fa44edf1",
+      "name": "Mushrooms (Cooked)",
+      "calories": {
+        "id": "9690d742-6aed-4e55-8e96-9793514b2c49",
+        "food_id": "a573d9e1-23f2-403d-aa98-6e85fa44edf1",
+        "total": 28,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 5.3,
+            "calories": 21.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.2,
+            "calories": 9.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.0,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mushrooms.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "a7181584-68ff-428f-a60c-76e295bb4bee",
+      "name": "Watermelon",
+      "calories": {
+        "id": "f30d707c-4028-42b5-b18f-615d3e3eb22c",
+        "food_id": "a7181584-68ff-428f-a60c-76e295bb4bee",
+        "total": 30,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 7.6,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.6,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.4,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "melon.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "a8359393-bc88-4085-90a1-dbe47ae50d10",
+      "name": "Pumpkin (Cooked)",
+      "calories": {
+        "id": "c9256617-ba99-4807-b412-7c8f0920a317",
+        "food_id": "a8359393-bc88-4085-90a1-dbe47ae50d10",
+        "total": 26,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 6.5,
+            "calories": 26.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.0,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.5,
+            "calories": 1.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "pumpkin.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "a9ac0b61-c279-43eb-8357-69504f6d02a6",
+      "name": "Mango Juice",
+      "calories": {
+        "id": "49d07da7-884c-46db-9a1d-0e68b29f8935",
+        "food_id": "a9ac0b61-c279-43eb-8357-69504f6d02a6",
+        "total": 54,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 13.0,
+            "calories": 52.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.4,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.2,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mango-juice.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "aa15b13b-99b9-4e9d-8257-afa91aaf33d7",
+      "name": "Mukimo",
+      "calories": {
+        "id": "ec7b03f0-c835-4fec-94ab-90ee03654796",
+        "food_id": "aa15b13b-99b9-4e9d-8257-afa91aaf33d7",
+        "total": 130,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 24.0,
+            "calories": 96.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.5,
+            "calories": 18.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 2.0,
+            "calories": 18.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 3.5,
+            "calories": 7.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mukimo.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "b1aff626-3a73-4c09-b03d-6fafbcdda483",
+      "name": "White Bread",
+      "calories": {
+        "id": "9754de7d-6d97-4ee9-b88c-957617df6bf4",
+        "food_id": "b1aff626-3a73-4c09-b03d-6fafbcdda483",
+        "total": 266,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 49.0,
+            "calories": 196.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 9.0,
+            "calories": 36.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.3,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "bread.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "b55bfc8f-ceef-40b4-8b21-e6c4deb4568d",
+      "name": "Mchicha (African Spinach)",
+      "calories": {
+        "id": "8a4eb90b-0ad1-4627-8234-f735ee006735",
+        "food_id": "b55bfc8f-ceef-40b4-8b21-e6c4deb4568d",
+        "total": 23,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.6,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.9,
+            "calories": 12.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.2,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mchicha.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "b899690c-822a-4a58-a174-cd6bd5589e86",
+      "name": "Rice (Brown, Cooked)",
+      "calories": {
+        "id": "9a790960-5023-4ffa-9c82-fed25cf82925",
+        "food_id": "b899690c-822a-4a58-a174-cd6bd5589e86",
+        "total": 112,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 23.5,
+            "calories": 94.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.6,
+            "calories": 10.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.9,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.8,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "brown-rice.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "b918bd62-a231-4cab-961e-c772b08d8e46",
+      "name": "Nduma (Arrowroot)",
+      "calories": {
+        "id": "9fd5cceb-835d-4d79-89c8-e06d3cbbeaa5",
+        "food_id": "b918bd62-a231-4cab-961e-c772b08d8e46",
+        "total": 65,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 13.4,
+            "calories": 54.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 4.2,
+            "calories": 17.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.3,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "nduma.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "ba9306d4-8462-42d6-aebc-aa18466d6149",
+      "name": "Eggs (Boiled)",
+      "calories": {
+        "id": "07bcd5fd-6338-41d3-b84a-984dd48361fa",
+        "food_id": "ba9306d4-8462-42d6-aebc-aa18466d6149",
+        "total": 155,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 1.1,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 12.6,
+            "calories": 50.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 10.6,
+            "calories": 95.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "eggs.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [
+        "eggs"
+      ],
+      "suitable_for_conditions": [
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "c3e6ee76-ca97-4e8d-bc47-ece38759d361",
+      "name": "Samaki (Fish with Coconut)",
+      "calories": {
+        "id": "9ca97d94-eb13-4a12-a59d-9ac826b79f52",
+        "food_id": "c3e6ee76-ca97-4e8d-bc47-ece38759d361",
+        "total": 185,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.2,
+            "calories": 13.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 22.0,
+            "calories": 88.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 9.5,
+            "calories": 86.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.5,
+            "calories": 1.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "samaki.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "pescatarian",
+        "halal"
+      ],
+      "allergens": [
+        "fish"
+      ],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension"
+      ]
+    },
+    {
+      "food_id": "c64f4b06-e937-48c6-b348-37673fd036f9",
+      "name": "Samosa",
+      "calories": {
+        "id": "6413d03e-fbf0-474c-a038-6757422ebeb5",
+        "food_id": "c64f4b06-e937-48c6-b348-37673fd036f9",
+        "total": 217,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 38.0,
+            "calories": 152.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 5.4,
+            "calories": 22.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 13.0,
+            "calories": 117.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.6,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "samosa.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "c92ea384-be01-4f50-84a1-0da0da7891da",
+      "name": "Madafu (Coconut Water)",
+      "calories": {
+        "id": "fb67a57e-1e09-4931-93b2-0494a39c2310",
+        "food_id": "c92ea384-be01-4f50-84a1-0da0da7891da",
+        "total": 19,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.7,
+            "calories": 15.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.7,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.1,
+            "calories": 2.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "madafu.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "ca529f30-b0fa-41df-9039-3e232161ffba",
+      "name": "Whole Milk",
+      "calories": {
+        "id": "41eedf8b-5462-4643-9e9c-9e41d081b65c",
+        "food_id": "ca529f30-b0fa-41df-9039-3e232161ffba",
+        "total": 61,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 4.8,
+            "calories": 19.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.3,
+            "calories": 13.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.3,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "milk.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "dairy"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "ca94e679-8fbf-4aa1-895a-cafdae9c8eaf",
+      "name": "Papaya (Pawpaw)",
+      "calories": {
+        "id": "12e6f44c-d21c-4b79-ac18-4d61ce7688bc",
+        "food_id": "ca94e679-8fbf-4aa1-895a-cafdae9c8eaf",
+        "total": 43,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 10.8,
+            "calories": 43.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.5,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.7,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "papaya.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "cb9c644a-acdc-4be8-98f9-13be96613afd",
+      "name": "Mursik (Fermented Milk)",
+      "calories": {
+        "id": "f0ce0142-03f5-4753-bd29-b9e78672abae",
+        "food_id": "cb9c644a-acdc-4be8-98f9-13be96613afd",
+        "total": 60,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.8,
+            "calories": 15.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.3,
+            "calories": 13.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.2,
+            "calories": 29.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mursik.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "dairy"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "cbcc8627-cec2-4c8f-80d3-faaa4a5a16ae",
+      "name": "Sweet Potato (Boiled)",
+      "calories": {
+        "id": "bad04586-7b20-40fa-a9d8-e3f191c4c1ae",
+        "food_id": "cbcc8627-cec2-4c8f-80d3-faaa4a5a16ae",
+        "total": 90,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 20.7,
+            "calories": 83.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.0,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 3.3,
+            "calories": 7.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "sweet-potato.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "d0942969-66ea-41ce-ad1b-bab06cc0ad25",
+      "name": "Maize (Boiled)",
+      "calories": {
+        "id": "999c2413-1cad-4cfd-892b-d29ba6557ab3",
+        "food_id": "d0942969-66ea-41ce-ad1b-bab06cc0ad25",
+        "total": 96,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 21.0,
+            "calories": 84.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.4,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 1.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "boiled-maize.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "d1c185ef-e11d-487f-9243-add45f7fe37c",
+      "name": "Njahi (Black Beans)",
+      "calories": {
+        "id": "eaf27bf2-152a-4dc1-830f-6ced742913e1",
+        "food_id": "d1c185ef-e11d-487f-9243-add45f7fe37c",
+        "total": 132,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 23.7,
+            "calories": 95.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 8.9,
+            "calories": 36.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.5,
+            "calories": 5.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 8.7,
+            "calories": 17.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "njahi.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "d3bf37ed-587e-40f1-b897-a90aca9efa8b",
+      "name": "Guava",
+      "calories": {
+        "id": "c12efbd9-777f-4e5b-bd55-031ec0f0c125",
+        "food_id": "d3bf37ed-587e-40f1-b897-a90aca9efa8b",
+        "total": 68,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 14.3,
+            "calories": 57.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.6,
+            "calories": 10.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 1.0,
+            "calories": 9.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 5.4,
+            "calories": 11.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "guava.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "d8b838ec-5b72-439b-86ad-a8c54b01739a",
+      "name": "Chai (Kenyan Spiced Tea with Milk)",
+      "calories": {
+        "id": "39f8804f-19e9-493c-b0e9-e766f3fb07d0",
+        "food_id": "d8b838ec-5b72-439b-86ad-a8c54b01739a",
+        "total": 65,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 10.5,
+            "calories": 42.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.5,
+            "calories": 10.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 1.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "chai.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "beverage",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [
+        "dairy"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "deb7aa29-1ed7-4e0f-b6a7-1f0e991dd903",
+      "name": "Passion Fruit",
+      "calories": {
+        "id": "4ddbbd17-b2c0-459a-bed7-8365ee3d7068",
+        "food_id": "deb7aa29-1ed7-4e0f-b6a7-1f0e991dd903",
+        "total": 97,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 23.4,
+            "calories": 94.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.2,
+            "calories": 9.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.7,
+            "calories": 6.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 10.4,
+            "calories": 21.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "passion-fruit.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "e2a2ee5d-839e-4924-8dd6-f785b7aac5fb",
+      "name": "Pineapple (Fresh)",
+      "calories": {
+        "id": "03c39565-648b-4383-b1d9-d397f5d94105",
+        "food_id": "e2a2ee5d-839e-4924-8dd6-f785b7aac5fb",
+        "total": 50,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 13.1,
+            "calories": 52.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.5,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.4,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "pineapple.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "hypertension",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "e37b1e4a-1e98-42ac-aa0f-960dcd6ac625",
+      "name": "Uji (Porridge)",
+      "calories": {
+        "id": "20f15e37-3678-4977-af54-7999ea5c3cad",
+        "food_id": "e37b1e4a-1e98-42ac-aa0f-960dcd6ac625",
+        "total": 85,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 18.5,
+            "calories": 74.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 2.2,
+            "calories": 9.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.8,
+            "calories": 7.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.5,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "uji.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "e6ef0e99-633f-46ba-be55-68c2bd3c08d2",
+      "name": "Apple",
+      "calories": {
+        "id": "36202f64-942c-45f1-b73a-b8fc675e98ec",
+        "food_id": "e6ef0e99-633f-46ba-be55-68c2bd3c08d2",
+        "total": 52,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 14.0,
+            "calories": 56.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 0.3,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.2,
+            "calories": 2.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "apple.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "fruit",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "e82368f0-ee8a-42ed-863a-e3816c32af2a",
+      "name": "Yogurt (Plain)",
+      "calories": {
+        "id": "d7ac77d9-6f23-4120-b6f1-f0ec05572439",
+        "food_id": "e82368f0-ee8a-42ed-863a-e3816c32af2a",
+        "total": 61,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 4.7,
+            "calories": 19.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.5,
+            "calories": 14.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 3.3,
+            "calories": 30.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 0.0,
+            "calories": 0.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "yogurt.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free"
+      ],
+      "allergens": [
+        "dairy"
+      ],
+      "suitable_for_conditions": [
+        "celiac_disease"
+      ]
+    },
+    {
+      "food_id": "ec59ee2e-32bf-4bd3-92b4-ac0178fe3fe8",
+      "name": "Mutura (Kenyan Sausage)",
+      "calories": {
+        "id": "327334ea-e3f8-47db-adc3-ae1744ceef4d",
+        "food_id": "ec59ee2e-32bf-4bd3-92b4-ac0178fe3fe8",
+        "total": 285,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 8.0,
+            "calories": 32.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 22.0,
+            "calories": 88.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 18.0,
+            "calories": 162.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.2,
+            "calories": 2.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "mutura.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "halal"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "f4330926-b552-4268-ada9-f159b3e24003",
+      "name": "Kale (Sukuma Wiki)",
+      "calories": {
+        "id": "181f3f6f-3379-4203-8202-8a11737c1ec5",
+        "food_id": "f4330926-b552-4268-ada9-f159b3e24003",
+        "total": 28,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 5.6,
+            "calories": 22.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.9,
+            "calories": 8.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.4,
+            "calories": 4.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.0,
+            "calories": 4.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "kales.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "dairy_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease",
+        "lactose_intolerance"
+      ]
+    },
+    {
+      "food_id": "f8c038a7-15f8-4eb9-b0bb-11d17d151b38",
+      "name": "Blueberry Muffin",
+      "calories": {
+        "id": "c59b1ff3-3f6b-472c-8d93-e1f2e222c579",
+        "food_id": "f8c038a7-15f8-4eb9-b0bb-11d17d151b38",
+        "total": 337,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 50.0,
+            "calories": 200.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 6.8,
+            "calories": 27.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 12.5,
+            "calories": 113.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 1.7,
+            "calories": 3.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "muffin.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "breakfast or snack",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergens": [
+        "gluten",
+        "wheat",
+        "dairy",
+        "eggs"
+      ],
+      "suitable_for_conditions": []
+    },
+    {
+      "food_id": "fa86fa19-90f2-48d8-a1f1-220860f5f45c",
+      "name": "Yams (Boiled)",
+      "calories": {
+        "id": "bbeb7724-0253-4a77-9adb-59acdd1144ce",
+        "food_id": "fa86fa19-90f2-48d8-a1f1-220860f5f45c",
+        "total": 116,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 27.5,
+            "calories": 110.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 1.5,
+            "calories": 6.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.1,
+            "calories": 1.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 4.1,
+            "calories": 8.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "yams.png",
+      "macro_nutrient": "Carbohydrate",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "heart_disease"
+      ]
+    },
+    {
+      "food_id": "fa92352f-8c18-47f9-be46-03afd109a790",
+      "name": "Spinach (Cooked)",
+      "calories": {
+        "id": "6e702a8b-cd93-4ec1-a7b1-ee8b5ff423e3",
+        "food_id": "fa92352f-8c18-47f9-be46-03afd109a790",
+        "total": 23,
+        "breakdown": {
+          "carbohydrate": {
+            "amount": 3.8,
+            "calories": 15.0,
+            "unit": "g"
+          },
+          "protein": {
+            "amount": 3.0,
+            "calories": 12.0,
+            "unit": "g"
+          },
+          "fat": {
+            "amount": 0.3,
+            "calories": 3.0,
+            "unit": "g"
+          },
+          "fiber": {
+            "amount": 2.4,
+            "calories": 5.0,
+            "unit": "g"
+          }
+        }
+      },
+      "image_url": "spinach.png",
+      "macro_nutrient": "Protein",
+      "meal_type": "lunch or supper",
+      "reference_portion_grams": 100,
+      "dietary_tags": [
+        "vegan",
+        "vegetarian",
+        "halal",
+        "kosher",
+        "gluten_free",
+        "keto",
+        "paleo"
+      ],
+      "allergens": [],
+      "suitable_for_conditions": [
+        "diabetes",
+        "hypertension",
+        "high_cholesterol",
+        "heart_disease",
+        "celiac_disease"
+      ]
+    }
+]
+
+### 
+POST https://api.utakula.co.ke/subscriptions/check_status
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzgwMWVkYjAtNWYwNS00N2YxLWE2MjMtZTg2M2UzNzVkODdjIiwidXNlcm5hbWUiOiJkZW1vX3V0YWt1bGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzQ5NjE5ODZ9.9CI7jpzZqe81eQkCQ4O6gWrPDuXEmq1S0Z9OqjwcPII
+
+###
+POST https://api.utakula.co.ke/memberships/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzgwMWVkYjAtNWYwNS00N2YxLWE2MjMtZTg2M2UzNzVkODdjIiwidXNlcm5hbWUiOiJkZW1vX3V0YWt1bGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzQ5NjE5ODZ9.9CI7jpzZqe81eQkCQ4O6gWrPDuXEmq1S0Z9OqjwcPII
+
+{
+    "membership_type": "plus annually",
+    "membership_name": "Utakula Plus (Annually)",
+    "membership_description": "Utakula Annual Plus Subscriptions",
+    "membership_price": 9000.00,
+    "billing_cycle": "annual",
+    "features": {},
+    "is_active": true
+}
+
+###
+POST https://api.utakula.co.ke/memberships/get_all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzgwMWVkYjAtNWYwNS00N2YxLWE2MjMtZTg2M2UzNzVkODdjIiwidXNlcm5hbWUiOiJkZW1vX3V0YWt1bGEiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzQ5NjE5ODZ9.9CI7jpzZqe81eQkCQ4O6gWrPDuXEmq1S0Z9OqjwcPII

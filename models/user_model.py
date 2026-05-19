@@ -34,8 +34,8 @@ class UserModel(Base):
     login_type: Mapped[LoginType] = mapped_column(String(20), nullable=False, default=LoginType.PASSWORD)
 
     # Relationships
-    meal_plan = relationship("MealPlanModel", back_populates="user", uselist=False)
-    notifications = relationship("NotificationModel", back_populates="user", uselist=False)
+    meal_plan = relationship("MealPlanModel", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    notifications = relationship("NotificationModel", back_populates="user", uselist=False, cascade="all, delete-orphan")
     metrics = relationship("UserMetricsModel", back_populates="user", cascade="all, delete-orphan")
     
     def __init__(self, username: str, email: str, password: str = None, **kwargs):

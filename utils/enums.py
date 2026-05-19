@@ -45,7 +45,11 @@ class MedicalDietaryCondition(str, Enum):
 
 class MembershipType(str, Enum):
     PLUS = "plus"
+    PLUS_MONTHLY = "plus monthly"
+    PLUS_ANNUALY = "plus annually"
     ELITE = "elite"
+    ELITE_MONTHLY = 'elite monthly'
+    ELITE_ANNUALY = 'elite annually'
 
 class BillingCycle(str, Enum):
     MONTHLY = "monthly"

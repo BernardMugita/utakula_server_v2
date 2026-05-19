@@ -107,7 +107,7 @@ class SubscriptionController:
                 ).dict()
             )
     
-    def check_subscription_status(self, user_data: SubscriptionStatusCheck, db: Session, authorization: str = Header(...)):
+    def check_subscription_status(self, db: Session, authorization: str = Header(...)):
         """
         Check user's current subscription status and feature access.
         This is called on app launch and when accessing premium features.
@@ -120,10 +120,10 @@ class SubscriptionController:
                 )
             
             token = authorization[7:]
-            utils.validate_JWT(token)
+            payload = utils.validate_JWT(token)
             
             subscription = db.query(SubscriptionModel).filter(
-                SubscriptionModel.user_id == str(user_data.user_id)
+                SubscriptionModel.user_id == str(payload['user_id'])
             ).first()
             
             if not subscription:

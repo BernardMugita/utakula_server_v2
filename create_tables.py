@@ -5,6 +5,10 @@ from models.food_model import FoodModel
 from models.meal_plan_model import MealPlanModel
 from models.notification_model import NotificationModel
 from models.user_metrics_model import UserMetricsModel
+from models.membership_model import MembershipModel
+from models.payment_history_model import PaymentHistoryModel
+from models.subscription_model import SubscriptionModel
+
 from connect import engine
 
 print("CREATING TABLES >>>>>")

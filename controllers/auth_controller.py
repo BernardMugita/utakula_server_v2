@@ -72,6 +72,7 @@ class AuthController:
 
     def create_user_account(self, user_data: UserCreate, db: Session) -> UserRead:
         """Create a new user account with email/password."""
+        print("Here we start")
         try:
             # Check if the user already exists by email or username
             existing_user = db.query(UserModel).filter(
@@ -108,6 +109,7 @@ class AuthController:
                 email=new_user.email
             )
 
+            print(user_response)
             # Return a successful response with the user details and status code 201
             return JSONResponse(
                 status_code=status.HTTP_200_OK,
