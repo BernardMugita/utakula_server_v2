@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Support Request</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #F3E3ED;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+                <table role="presentation" style="max-width: 600px; width: 100%; margin: 0 auto; background-color: #FFFFFF; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(16, 81, 0, 0.15);">
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #105100 0%, #1a6600 100%); padding: 30px; text-align: center;">
+                            <h1 style="color: #FFFFFF; font-size: 32px; margin: 0; font-weight: bold;">Utakula Support</h1>
+                            <p style="color: #FFE9F4; font-size: 14px; margin: 5px 0 0 0;">New Incoming Request</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <h2 style="color: #105100; font-size: 24px; margin: 0 0 20px 0; border-bottom: 2px solid #F3E3ED; padding-bottom: 10px;">Request Details</h2>
+                            
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 10px 0; color: #666666; font-weight: bold; width: 100px;">Name:</td>
+                                    <td style="padding: 10px 0; color: #333333;">{USER_NAME}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 0; color: #666666; font-weight: bold;">Email:</td>
+                                    <td style="padding: 10px 0; color: #333333;"><a href="mailto:{USER_EMAIL}" style="color: #105100; text-decoration: none;">{USER_EMAIL}</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 0; color: #666666; font-weight: bold;">Subject:</td>
+                                    <td style="padding: 10px 0; color: #333333; font-style: italic;">{SUBJECT}</td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-top: 30px; background-color: #F9F9F9; border-radius: 12px; padding: 25px; border-left: 4px solid #105100;">
+                                <h3 style="color: #105100; font-size: 18px; margin: 0 0 15px 0;">Message:</h3>
+                                <p style="color: #333333; font-size: 15px; line-height: 1.6; margin: 0; white-space: pre-wrap;">{MESSAGE}</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 30px; background-color: #F5F5F5; text-align: center; border-top: 1px solid #E0E0E0;">
+                            <p style="color: #999999; font-size: 12px; margin: 0;">
+                                This is an automated notification from the Utakula Server.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

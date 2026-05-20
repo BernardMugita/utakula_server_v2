@@ -1,0 +1,11 @@
+from pydantic import BaseModel, EmailStr
+
+class SupportRequest(BaseModel):
+    name: str
+    email: EmailStr
+    subject: str
+    message: str
+
+class SupportResponse(BaseModel):
+    status: str
+    message: str
