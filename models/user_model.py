@@ -4,6 +4,9 @@ from sqlalchemy import String
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from passlib.context import CryptContext
 from models.models import Base
+from models.notification_model import NotificationModel
+from models.user_metrics_model import UserMetricsModel
+from models.meal_plan_model import MealPlanModel
 
 # Configure the password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

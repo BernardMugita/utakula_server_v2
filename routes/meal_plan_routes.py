@@ -3,7 +3,8 @@ from fastapi import APIRouter, Body, Depends, Header
 from sqlalchemy.orm import Session
 from connect import SessionLocal
 
-from controllers.meal_plan_controller import MealPlanController
+# from controllers.meal_plan_controller import MealPlanController
+from controllers.new_meal_plan_controller import MealPlanController
 from schemas.meal_plan_schema import MealPlanPreferences, CreateMealPlanResponse, FetchMemberPlansResponse, MealPlanCreate, MealPlanUpdate, RetrieveMealPlanResponse, SuggestMealPlanResponse, UpdateMealPlanResponse
 
 router = APIRouter()

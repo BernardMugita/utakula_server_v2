@@ -242,7 +242,7 @@ class MealPlanHelpers:
         print(macros)
         
         return SelectedFood(
-            id=food.food_id,
+            id=str(food.food_id),
             name=food.name,
             image_url=food.image_url,
             grams=grams,
@@ -318,7 +318,7 @@ class MealPlanHelpers:
             logger.warning("No lunch/supper foods available!")
         
         # Generate meal plan for each day
-        days_of_the_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        days_of_the_week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         meal_plan = []
         
         for day_index, day in enumerate(days_of_the_week):

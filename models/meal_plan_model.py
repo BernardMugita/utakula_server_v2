@@ -1,6 +1,7 @@
 from sqlalchemy import JSON, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models.models import Base  # Ensure Base is correctly imported
+from models.models import Base
+from models.meal_plan_day_model import MealPlanDayModel
 import uuid
 
 class MealPlanModel(Base):
@@ -22,6 +23,8 @@ class MealPlanModel(Base):
     members: Mapped[list] = mapped_column(JSON, nullable=False)
     
     meal_plan: Mapped[dict] = mapped_column(JSON, nullable=False)
+    
+    day_plans = relationship("MealPlanDayModel", back_populates="meal_plan", cascade="all, delete-orphan")
 
     # Define the reverse relationship with UserModel
     user = relationship("UserModel", back_populates="meal_plan")

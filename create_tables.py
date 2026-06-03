@@ -8,6 +8,9 @@ from models.user_metrics_model import UserMetricsModel
 from models.membership_model import MembershipModel
 from models.payment_history_model import PaymentHistoryModel
 from models.subscription_model import SubscriptionModel
+from models.meal_plan_meal_model import MealPlanMealModel
+from models.meal_plan_food_item_model import MealPlanFoodItemModel
+from models.meal_plan_day_model import MealPlanDayModel
 
 from connect import engine
 
